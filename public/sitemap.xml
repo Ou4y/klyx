@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Safe source default. The production build replaces these URLs from VITE_SITE_URL. -->
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url><loc>http://localhost/</loc></url>
+  <url><loc>http://localhost/privacy</loc></url>
+  <url><loc>http://localhost/terms</loc></url>
+</urlset>

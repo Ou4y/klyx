@@ -1,0 +1,19 @@
+{
+  "name": "KLYX",
+  "short_name": "KLYX",
+  "description": "Websites, commerce stores, and internal tools for growing businesses.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#F5F4EF",
+  "theme_color": "#171A18",
+  "lang": "en",
+  "dir": "ltr",
+  "icons": [
+    {
+      "src": "/brand/klyx-k-dark.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ]
+}

@@ -1,0 +1,3 @@
+# Safe source default. The production build replaces this when VITE_SITE_URL is configured.
+User-agent: *
+Disallow: /

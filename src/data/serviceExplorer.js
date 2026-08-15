@@ -1,0 +1,288 @@
+export const serviceExplorerContent = {
+  en: {
+    eyebrow: 'Service explorer / Clear starting points',
+    title: 'Choose the service that fits your next step',
+    intro: 'Open the area that matches your business, then compare the packages inside it.',
+    shortcutLabel: 'Choose by audience',
+    shortcuts: [
+      { serviceId: 'commerce', label: 'For brands & store owners', icon: 'commerce' },
+      { serviceId: 'landing-pages', label: 'For campaigns & offers', icon: 'landing' },
+      { serviceId: 'portfolio', label: 'For individuals', icon: 'portfolio' },
+      { serviceId: 'corporate', label: 'For companies', icon: 'corporate' },
+      { serviceId: 'internal-tools', label: 'For teams', icon: 'tools' },
+    ],
+    labels: {
+      startingFrom: 'Starting from',
+      bestFor: 'Best for',
+      included: 'What is included',
+      ask: 'Ask about this package',
+      domainBadge: 'Domain included for 1 year',
+      open: 'Open',
+      close: 'Close',
+      packages: 'packages',
+    },
+    domain: {
+      title: 'Domain inclusion / Selected packages',
+      lead: 'Selected second-tier packages include one standard available domain name for the first year.',
+      items: [
+        'The domain is subject to availability; premium, auction, or unusually expensive domains are not included.',
+        'The client owns the domain, and renewal after the first year is separate.',
+        'Hosting, paid tools, plugins, advertising spend, payment-provider fees, and other third-party costs are separate unless clearly stated in a signed quote.',
+      ],
+    },
+    afterLaunch: {
+      meta: 'CARE / AFTER LAUNCH',
+      title: 'What happens after launch?',
+      intro: 'Each package includes the launch support period shown on its card. Continuing work stays clear and separately approved.',
+      notes: [
+        'After the included period, KLYX works only through an active care subscription or a new approved paid scope.',
+        'Small monthly revisions do not carry forward.',
+        'Major features, redesigns, new pages, large content updates, advanced integrations, and custom development are quoted separately.',
+        'Operations includes Maintenance by default only for Commerce packages. Ordinary websites use Website Care, not daily Operations.',
+      ],
+      careTitle: 'Website Care options',
+      caution: 'Care plans cover the agreed recurring scope and capacity. They are not unlimited support.',
+      care: [
+        { name: 'Technical Maintenance Light', price: 'EGP 1,900/month' },
+        { name: 'Technical Maintenance Care', price: 'EGP 3,400/month' },
+        { name: 'Website Content Care', price: 'EGP 4,900/month' },
+        { name: 'Internal Tool Care', price: 'From EGP 6,900/month' },
+      ],
+    },
+    services: [
+      {
+        id: 'commerce',
+        icon: 'commerce',
+        title: 'Commerce',
+        audience: 'For brands selling online and needing a store, ongoing store care, or managed operations.',
+        startingPrice: 'EGP 14,900',
+        note: 'After the included support period, KLYX only continues work through an active Maintenance or Operations subscription, or through a separately approved scope.',
+        packages: [
+          {
+            id: 'starter-commerce-foundation',
+            name: 'Starter Commerce Foundation',
+            price: 'From EGP 14,900',
+            bestFor: 'A brand launching its first online store.',
+            inclusions: ['Storefront setup', 'Core catalogue setup', 'Basic merchandising setup', 'Mobile-ready store experience', 'Payment, shipping, and core store settings as agreed'],
+            support: '15 days of Technical Maintenance after launch. Ongoing store operations are not included after this period.',
+          },
+          {
+            id: 'basic-commerce-foundation',
+            name: 'Basic Commerce Foundation',
+            price: 'From EGP 24,900',
+            bestFor: 'A brand that needs launch support after the store goes live.',
+            inclusions: ['Everything in Starter Commerce Foundation', '15 days of Store Operations', '15 days of Technical Maintenance'],
+            support: '15 days of Store Operations and Technical Maintenance after launch.',
+            domainIncluded: true,
+          },
+          {
+            id: 'pro-commerce-foundation',
+            name: 'Pro Commerce Foundation',
+            price: 'From EGP 39,900',
+            bestFor: 'A brand that needs stronger launch support and managed attention.',
+            inclusions: ['Everything in Basic Commerce Foundation within the agreed scope; the one-year domain benefit is not repeated', '30 days of Store Operations', '30 days of Technical Maintenance', 'Higher-touch launch support within the agreed scope'],
+            support: '30 days of Store Operations and Technical Maintenance after launch.',
+          },
+        ],
+      },
+      {
+        id: 'landing-pages',
+        icon: 'landing',
+        title: 'Landing Pages',
+        audience: 'For one focused campaign, offer, product launch, event, or lead-generation goal.',
+        startingPrice: 'EGP 7,900',
+        packages: [
+          {
+            id: 'landing-launch', name: 'Landing Launch', price: 'EGP 7,900', bestFor: 'A simple launch, offer, event, or lead-generation page.',
+            inclusions: ['One focused landing page', 'Up to 8 content sections', 'Responsive design', 'WhatsApp or contact action', 'Client-supplied content placed professionally', 'Basic launch SEO'],
+            support: '15 days of Technical Maintenance after launch.',
+          },
+          {
+            id: 'campaign-landing', name: 'Campaign Landing', price: 'EGP 12,900', bestFor: 'A stronger campaign that needs a better conversion journey.',
+            inclusions: ['More custom page structure', 'Up to 14 content sections', 'Lead form and WhatsApp route', 'Basic analytics setup', 'Basic launch SEO', 'Copy structure guidance'],
+            support: '15 days of Technical Maintenance after launch.', domainIncluded: true,
+          },
+          {
+            id: 'bilingual-campaign-landing', name: 'Bilingual Campaign Landing', price: 'EGP 18,900', bestFor: 'Campaigns speaking to both Arabic and English audiences.',
+            inclusions: ['Campaign Landing scope', 'English and Arabic versions', 'Proper RTL and LTR layouts', 'Language switcher'],
+            support: '30 days of Technical Maintenance after launch.',
+          },
+        ],
+      },
+      {
+        id: 'portfolio',
+        icon: 'portfolio',
+        title: 'Portfolio Websites',
+        audience: 'For professionals, creators, freelancers, and founders who need to present their work clearly.',
+        startingPrice: 'EGP 9,900',
+        packages: [
+          {
+            id: 'portfolio-launch', name: 'Portfolio Launch', price: 'EGP 9,900', bestFor: 'A freelancer, graduate, creator, or professional starting their online presence.',
+            inclusions: ['Up to 3 main pages or sections', 'Up to 3 work samples', 'Contact form or WhatsApp action', 'Social links', 'Responsive design', 'Basic launch SEO'],
+            support: '15 days of Technical Maintenance after launch.',
+          },
+          {
+            id: 'professional-portfolio', name: 'Professional Portfolio', price: 'EGP 15,900', bestFor: 'A professional who needs stronger positioning and more detailed work presentation.',
+            inclusions: ['Up to 6 case studies or work samples', 'Custom visual direction', 'About, services, work, and contact structure', 'CV or downloadable profile link if supplied', 'Testimonials section if supplied', 'Basic launch SEO'],
+            support: '15 days of Technical Maintenance after launch.', domainIncluded: true,
+          },
+          {
+            id: 'bilingual-portfolio-authority', name: 'Bilingual Portfolio Authority', price: 'EGP 23,900', bestFor: 'Founders, consultants, and senior professionals.',
+            inclusions: ['Up to 10 curated work samples or case studies', 'English and Arabic versions', 'Proper RTL and LTR quality checks', 'Custom components', 'Contact and booking route'],
+            support: '30 days of Technical Maintenance after launch.',
+          },
+        ],
+      },
+      {
+        id: 'corporate',
+        icon: 'corporate',
+        title: 'Corporate Websites',
+        audience: 'For companies that need a credible, complete online presence.',
+        startingPrice: 'EGP 14,900',
+        packages: [
+          {
+            id: 'corporate-foundation', name: 'Corporate Foundation', price: 'EGP 14,900', bestFor: 'A small business that needs a credible first company website.',
+            inclusions: ['Up to 5 standard pages: Home, About, Services, Projects or Work, and Contact', 'WhatsApp and enquiry form', 'Mobile-first design', 'Basic launch SEO'],
+            support: '15 days of Technical Maintenance after launch.',
+          },
+          {
+            id: 'corporate-growth', name: 'Corporate Growth', price: 'EGP 24,900', bestFor: 'An established business with multiple services, projects, or customer types.',
+            inclusions: ['Up to 10 standard pages', 'Stronger services structure', 'Projects or case studies', 'Enquiry routing', 'Basic analytics', 'Clearer content hierarchy', 'Basic launch SEO'],
+            support: '15 days of Technical Maintenance after launch.', domainIncluded: true,
+          },
+          {
+            id: 'corporate-authority', name: 'Corporate Authority', price: 'EGP 39,900', bestFor: 'A company that needs a full bilingual online presence.',
+            inclusions: ['Up to 15 standard pages', 'English and Arabic versions', 'RTL and LTR quality assurance', 'Services, projects, careers, or FAQs as agreed', 'Custom page sections', 'Analytics setup', 'Technical SEO foundation'],
+            support: '30 days of Technical Maintenance after launch.',
+          },
+        ],
+      },
+      {
+        id: 'internal-tools',
+        icon: 'tools',
+        title: 'Internal Tools',
+        audience: 'For teams that need a simple custom system to manage work, clients, tasks, approvals, or reporting.',
+        startingPrice: 'EGP 7,500 for System Discovery',
+        subheading: 'Start with Discovery. Build with clarity.',
+        explanation: 'Internal tools depend on your team, workflow, access levels, data, and integrations. We begin by understanding the work before promising a final build scope.',
+        packages: [
+          {
+            id: 'system-discovery', name: 'System Discovery', price: 'EGP 7,500', bestFor: 'Teams that need a clear, evidence-based scope before committing to a build.',
+            inclusions: ['5–7 working days', 'Workflow mapping', 'User and role mapping', 'Screen and data needs', 'Risks and integrations review', 'Written scope and build estimate'],
+            support: 'If the client approves the build within 14 days, 50% of the Discovery fee is credited toward the build.',
+          },
+          {
+            id: 'internal-tool-mvp', name: 'Internal Tool MVP', price: 'From EGP 39,900', bestFor: 'One team that needs one core workflow made simpler.',
+            inclusions: ['One team or one core workflow', 'Sign-in and basic user roles', 'One main dashboard or work list', 'One core process', 'Simple reporting', 'Testing and handover', 'Connected to your existing domain instead when applicable'],
+            support: '15 days of defect support after handover.', domainIncluded: true, domainBadge: 'Domain included for 1 year when a separate public address is needed',
+          },
+          {
+            id: 'workflow-system', name: 'Workflow System', price: 'From EGP 79,900', bestFor: 'Teams connecting two or three related workflows.',
+            inclusions: ['Two or three connected workflows', 'User roles and status tracking', 'Reports', 'Approved simple integrations', 'Training and handover'],
+            support: '30 days of Technical Maintenance after handover.',
+          },
+          {
+            id: 'custom-operations-platform', name: 'Custom Operations Platform', price: 'From EGP 150,000', bestFor: 'Larger operations with several teams or departments.',
+            inclusions: ['Larger custom systems', 'Several teams or departments', 'Complex data, dashboards, automation, integrations, or security needs', 'Proposal only after System Discovery'],
+            support: 'Launch and continuing support are defined in the proposal after Discovery.',
+          },
+        ],
+      },
+    ],
+  },
+  ar: {
+    eyebrow: 'دليل الخدمات / بداية واضحة',
+    title: 'اختر الخدمة المناسبة لخطوتك القادمة',
+    intro: 'افتح المجال الأقرب لاحتياج عملك، ثم قارن بين الباقات المتاحة داخله.',
+    shortcutLabel: 'اختر حسب احتياجك',
+    shortcuts: [
+      { serviceId: 'commerce', label: 'للعلامات التجارية وأصحاب المتاجر', icon: 'commerce' },
+      { serviceId: 'landing-pages', label: 'للحملات والعروض', icon: 'landing' },
+      { serviceId: 'portfolio', label: 'للأفراد', icon: 'portfolio' },
+      { serviceId: 'corporate', label: 'للشركات', icon: 'corporate' },
+      { serviceId: 'internal-tools', label: 'لفِرَق العمل', icon: 'tools' },
+    ],
+    labels: {
+      startingFrom: 'تبدأ من',
+      bestFor: 'مناسبة لـ',
+      included: 'ما تشمله الباقة',
+      ask: 'اسأل عن هذه الباقة',
+      domainBadge: 'النطاق مشمول لمدة عام',
+      open: 'افتح',
+      close: 'أغلق',
+      packages: 'باقات',
+    },
+    domain: {
+      title: 'النطاق / باقات محددة',
+      lead: 'تشمل باقات المستوى الثاني المحددة اسم نطاق قياسيًا متاحًا لمدة العام الأول.',
+      items: [
+        'توفير النطاق مرتبط بمدى إتاحته، ولا يشمل النطاقات المميزة أو المعروضة في مزاد أو مرتفعة التكلفة بصورة غير معتادة.',
+        'ملكية النطاق للعميل، وتجديده بعد العام الأول يُحاسب بشكل منفصل.',
+        'الاستضافة والأدوات والإضافات المدفوعة وتكلفة الإعلانات ورسوم مزودي الدفع وأي تكاليف خارجية أخرى منفصلة، ما لم ينص عرض سعر موقّع على غير ذلك.',
+      ],
+    },
+    afterLaunch: {
+      meta: 'الرعاية / بعد الإطلاق',
+      title: 'ماذا يحدث بعد الإطلاق؟',
+      intro: 'تشمل كل باقة فترة دعم الإطلاق الموضحة في بطاقتها، وأي عمل مستمر يكون باتفاق واضح ومنفصل.',
+      notes: [
+        'بعد انتهاء الفترة المشمولة، يستمر عمل KLYX فقط من خلال اشتراك رعاية فعّال أو نطاق عمل مدفوع جديد ومعتمد.',
+        'التعديلات الشهرية الصغيرة غير المستخدمة لا تنتقل إلى الشهر التالي.',
+        'المزايا الكبيرة وإعادة التصميم والصفحات الجديدة وتحديثات المحتوى الكبيرة والتكاملات المتقدمة والتطوير المخصص يتم تسعيرها بصورة منفصلة.',
+        'تشمل العمليات الصيانة تلقائيًا في باقات التجارة الإلكترونية فقط. أما المواقع المعتادة فتستخدم رعاية المواقع، وليس التشغيل اليومي.',
+      ],
+      careTitle: 'خيارات رعاية المواقع',
+      caution: 'تغطي باقات الرعاية النطاق والسعة المتفق عليهما، ولا تمثل دعمًا غير محدود.',
+      care: [
+        { name: 'الصيانة التقنية الخفيفة', price: 'EGP 1,900 شهريًا' },
+        { name: 'الرعاية التقنية', price: 'EGP 3,400 شهريًا' },
+        { name: 'رعاية محتوى الموقع', price: 'EGP 4,900 شهريًا' },
+        { name: 'رعاية النظام الداخلي', price: 'ابتداءً من EGP 6,900 شهريًا' },
+      ],
+    },
+    services: [
+      {
+        id: 'commerce', icon: 'commerce', title: 'التجارة الإلكترونية', audience: 'للعلامات التجارية التي تبيع عبر الإنترنت وتحتاج إلى متجر أو رعاية مستمرة للمتجر أو تشغيل مُدار.', startingPrice: 'EGP 14,900',
+        note: 'بعد انتهاء فترة الدعم المشمولة، يستمر عمل KLYX فقط من خلال اشتراك صيانة أو تشغيل فعّال، أو نطاق عمل منفصل ومعتمد.',
+        packages: [
+          { id: 'starter-commerce-foundation', name: 'باقة تأسيس المتجر المبدئية', price: 'ابتداءً من EGP 14,900', bestFor: 'علامة تجارية تطلق متجرها الإلكتروني الأول.', inclusions: ['إعداد واجهة المتجر', 'إعداد الكتالوج الأساسي', 'إعداد العرض التجاري الأساسي', 'تجربة متجر متوافقة مع الهاتف', 'إعداد الدفع والشحن والإعدادات الأساسية حسب الاتفاق'], support: '15 يومًا من الصيانة التقنية بعد الإطلاق. لا تشمل الباقة تشغيلًا مستمرًا للمتجر بعد هذه الفترة.' },
+          { id: 'basic-commerce-foundation', name: 'باقة تأسيس المتجر الأساسية', price: 'ابتداءً من EGP 24,900', bestFor: 'علامة تجارية تحتاج إلى دعم بعد تشغيل المتجر.', inclusions: ['كل ما في باقة التأسيس المبدئية', '15 يومًا من تشغيل المتجر', '15 يومًا من الصيانة التقنية'], support: '15 يومًا من تشغيل المتجر والصيانة التقنية بعد الإطلاق.', domainIncluded: true },
+          { id: 'pro-commerce-foundation', name: 'باقة تأسيس المتجر الاحترافية', price: 'ابتداءً من EGP 39,900', bestFor: 'علامة تجارية تحتاج إلى دعم أقوى واهتمام مُدار عند الإطلاق.', inclusions: ['كل ما في باقة التأسيس الأساسية ضمن النطاق المتفق عليه، من دون تكرار ميزة النطاق لعام كعنصر بيع مستقل', '30 يومًا من تشغيل المتجر', '30 يومًا من الصيانة التقنية', 'دعم إطلاق مكثف ضمن النطاق المتفق عليه'], support: '30 يومًا من تشغيل المتجر والصيانة التقنية بعد الإطلاق.' },
+        ],
+      },
+      {
+        id: 'landing-pages', icon: 'landing', title: 'صفحات الهبوط', audience: 'لحملة أو عرض أو إطلاق منتج أو فعالية أو هدف واحد واضح لجمع العملاء المحتملين.', startingPrice: 'EGP 7,900',
+        packages: [
+          { id: 'landing-launch', name: 'صفحة إطلاق', price: 'EGP 7,900', bestFor: 'إطلاق بسيط أو عرض أو فعالية أو صفحة لجمع العملاء المحتملين.', inclusions: ['صفحة هبوط واحدة مركزة', 'حتى 8 أقسام محتوى', 'تصميم متجاوب', 'إجراء واتساب أو تواصل', 'تنسيق المحتوى المقدم من العميل بصورة احترافية', 'أساسيات تهيئة محركات البحث عند الإطلاق'], support: '15 يومًا من الصيانة التقنية بعد الإطلاق.' },
+          { id: 'campaign-landing', name: 'صفحة حملة', price: 'EGP 12,900', bestFor: 'حملة أقوى تحتاج إلى رحلة تحويل أوضح.', inclusions: ['هيكل صفحة أكثر تخصيصًا', 'حتى 14 قسم محتوى', 'نموذج لجمع البيانات ومسار واتساب', 'إعداد تحليلات أساسي', 'أساسيات تهيئة محركات البحث عند الإطلاق', 'إرشاد في تنظيم النصوص'], support: '15 يومًا من الصيانة التقنية بعد الإطلاق.', domainIncluded: true },
+          { id: 'bilingual-campaign-landing', name: 'صفحة حملة ثنائية اللغة', price: 'EGP 18,900', bestFor: 'حملات تخاطب الجمهور العربي والإنجليزي.', inclusions: ['نطاق باقة صفحة الحملة', 'نسختان عربية وإنجليزية', 'تخطيط سليم من اليمين إلى اليسار ومن اليسار إلى اليمين', 'مبدّل للغة'], support: '30 يومًا من الصيانة التقنية بعد الإطلاق.' },
+        ],
+      },
+      {
+        id: 'portfolio', icon: 'portfolio', title: 'المواقع المهنية للأفراد', audience: 'للمهنيين وصنّاع المحتوى والمستقلين والمؤسسين الذين يحتاجون إلى عرض أعمالهم بوضوح.', startingPrice: 'EGP 9,900',
+        packages: [
+          { id: 'portfolio-launch', name: 'انطلاقة الملف المهني', price: 'EGP 9,900', bestFor: 'مستقل أو خريج أو صانع محتوى أو مهني يبدأ حضوره الرقمي.', inclusions: ['حتى 3 صفحات أو أقسام رئيسية', 'حتى 3 نماذج أعمال', 'نموذج تواصل أو إجراء واتساب', 'روابط منصات التواصل', 'تصميم متجاوب', 'أساسيات تهيئة محركات البحث عند الإطلاق'], support: '15 يومًا من الصيانة التقنية بعد الإطلاق.' },
+          { id: 'professional-portfolio', name: 'الملف المهني الاحترافي', price: 'EGP 15,900', bestFor: 'مهني يحتاج إلى تموضع أقوى وعرض أكثر تفصيلًا لأعماله.', inclusions: ['حتى 6 دراسات حالة أو نماذج أعمال', 'توجه بصري مخصص', 'هيكل للتعريف والخدمات والأعمال والتواصل', 'رابط للسيرة الذاتية أو ملف تعريفي قابل للتنزيل إذا تم توفيره', 'قسم لآراء العملاء إذا تم توفيرها', 'أساسيات تهيئة محركات البحث عند الإطلاق'], support: '15 يومًا من الصيانة التقنية بعد الإطلاق.', domainIncluded: true },
+          { id: 'bilingual-portfolio-authority', name: 'الملف المهني المتقدم ثنائي اللغة', price: 'EGP 23,900', bestFor: 'المؤسسين والاستشاريين وكبار المهنيين.', inclusions: ['حتى 10 نماذج أعمال أو دراسات حالة منتقاة', 'نسختان عربية وإنجليزية', 'مراجعة جودة كاملة لاتجاهي الكتابة', 'مكونات مخصصة', 'مسار للتواصل والحجز'], support: '30 يومًا من الصيانة التقنية بعد الإطلاق.' },
+        ],
+      },
+      {
+        id: 'corporate', icon: 'corporate', title: 'مواقع الشركات', audience: 'للشركات التي تحتاج إلى حضور رقمي موثوق ومتكامل.', startingPrice: 'EGP 14,900',
+        packages: [
+          { id: 'corporate-foundation', name: 'تأسيس موقع الشركة', price: 'EGP 14,900', bestFor: 'شركة صغيرة تحتاج إلى أول موقع موثوق لها.', inclusions: ['حتى 5 صفحات قياسية: الرئيسية، من نحن، الخدمات، المشاريع أو الأعمال، والتواصل', 'واتساب ونموذج استفسار', 'تصميم يبدأ من الهاتف', 'أساسيات تهيئة محركات البحث عند الإطلاق'], support: '15 يومًا من الصيانة التقنية بعد الإطلاق.' },
+          { id: 'corporate-growth', name: 'موقع الشركة للنمو', price: 'EGP 24,900', bestFor: 'شركة قائمة لديها خدمات أو مشروعات أو شرائح عملاء متعددة.', inclusions: ['حتى 10 صفحات قياسية', 'هيكل أقوى للخدمات', 'مشروعات أو دراسات حالة', 'توجيه الاستفسارات', 'تحليلات أساسية', 'تسلسل أوضح للمحتوى', 'أساسيات تهيئة محركات البحث عند الإطلاق'], support: '15 يومًا من الصيانة التقنية بعد الإطلاق.', domainIncluded: true },
+          { id: 'corporate-authority', name: 'الموقع المؤسسي المتقدم', price: 'EGP 39,900', bestFor: 'شركة تحتاج إلى حضور رقمي كامل بالعربية والإنجليزية.', inclusions: ['حتى 15 صفحة قياسية', 'نسختان عربية وإنجليزية', 'مراجعة جودة لاتجاهي الكتابة', 'الخدمات والمشروعات والوظائف أو الأسئلة الشائعة حسب الاتفاق', 'أقسام صفحات مخصصة', 'إعداد التحليلات', 'أساس تقني لتهيئة محركات البحث'], support: '30 يومًا من الصيانة التقنية بعد الإطلاق.' },
+        ],
+      },
+      {
+        id: 'internal-tools', icon: 'tools', title: 'الأنظمة الداخلية', audience: 'لفِرَق العمل التي تحتاج إلى نظام مخصص وبسيط لإدارة العمل أو العملاء أو المهام أو الموافقات أو التقارير.', startingPrice: 'EGP 7,500 لاكتشاف النظام', subheading: 'ابدأ بالاكتشاف. وابنِ على وضوح.', explanation: 'تعتمد الأنظمة الداخلية على فريقك وطريقة العمل ومستويات الصلاحية والبيانات والتكاملات. لذلك نبدأ بفهم العمل قبل الالتزام بنطاق نهائي للتنفيذ.',
+        packages: [
+          { id: 'system-discovery', name: 'اكتشاف النظام', price: 'EGP 7,500', bestFor: 'فريق يحتاج إلى نطاق واضح ومدعوم بالأدلة قبل الالتزام بالتنفيذ.', inclusions: ['من 5 إلى 7 أيام عمل', 'رسم مسار العمل', 'تحديد المستخدمين والأدوار', 'تحديد الشاشات والبيانات المطلوبة', 'مراجعة المخاطر والتكاملات', 'نطاق مكتوب وتقدير تكلفة التنفيذ'], support: 'إذا اعتمد العميل التنفيذ خلال 14 يومًا، يُخصم 50% من رسوم الاكتشاف من قيمة التنفيذ.' },
+          { id: 'internal-tool-mvp', name: 'النسخة الأولية للنظام الداخلي', price: 'ابتداءً من EGP 39,900', bestFor: 'فريق واحد يحتاج إلى تبسيط مسار عمل أساسي واحد.', inclusions: ['فريق واحد أو مسار عمل أساسي واحد', 'تسجيل دخول وأدوار مستخدمين أساسية', 'لوحة رئيسية أو قائمة عمل واحدة', 'عملية أساسية واحدة', 'تقارير بسيطة', 'اختبار وتسليم', 'الربط بنطاقك الحالي بدلًا من نطاق منفصل عند انطباق ذلك'], support: '15 يومًا من دعم العيوب بعد التسليم.', domainIncluded: true, domainBadge: 'النطاق مشمول لمدة عام عند الحاجة إلى عنوان عام منفصل' },
+          { id: 'workflow-system', name: 'نظام مسارات العمل', price: 'ابتداءً من EGP 79,900', bestFor: 'فِرَق تربط بين مسارين أو ثلاثة مسارات عمل مترابطة.', inclusions: ['مساران أو ثلاثة مسارات عمل مترابطة', 'أدوار مستخدمين وتتبع للحالات', 'تقارير', 'تكاملات بسيطة ومعتمدة', 'تدريب وتسليم'], support: '30 يومًا من الصيانة التقنية بعد التسليم.' },
+          { id: 'custom-operations-platform', name: 'منصة تشغيل مخصصة', price: 'ابتداءً من EGP 150,000', bestFor: 'عمليات أكبر تضم عدة فِرَق أو إدارات.', inclusions: ['أنظمة مخصصة أكبر', 'عدة فِرَق أو إدارات', 'بيانات ولوحات وتحليلات وأتمتة وتكاملات أو احتياجات أمنية معقدة', 'عرض التنفيذ يصدر فقط بعد اكتشاف النظام'], support: 'يُحدد دعم الإطلاق والاستمرار في العرض الصادر بعد الاكتشاف.' },
+        ],
+      },
+    ],
+  },
+}
