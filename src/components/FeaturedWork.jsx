@@ -1,36 +1,37 @@
 import { projects } from '../data/projects'
-import { Icon } from './Icon'
 import { siteContent } from '../data/siteContent'
 import { useLocale } from '../i18n/locale-context'
+import { Icon } from './Icon'
 
-function ProjectCard({ project, copy }) {
+function ProjectCard({ project, visitLabel }) {
   return (
-    <article className="project-card">
-      <div className="project-card__image">
+    <article className={`project-card project-card--${project.tone}`} aria-label={project.name}>
+      <div className="project-card__logo">
         <img
-          src={project.image.src}
-          srcSet={project.image.srcSet || undefined}
-          sizes="(max-width: 760px) 100vw, 50vw"
-          width={project.image.width}
-          height={project.image.height}
-          alt={project.image.alt}
+          className="project-card__client-logo"
+          src={project.logo.src}
+          width={project.logo.width}
+          height={project.logo.height}
+          alt={`${project.name} logo`}
           loading="lazy"
           decoding="async"
         />
       </div>
-      <div className="project-card__body">
-        <p className="mono">{project.category}</p>
-        <h3>{project.name}</h3>
-        <p>{project.contribution}</p>
-        {(project.instagramUrl || project.websiteUrl) && (
-          <div className="project-card__actions">
-            {project.instagramUrl && (
-              <a href={project.instagramUrl} target="_blank" rel="noopener noreferrer">{copy.instagram} <Icon name="external" size={16} /></a>
-            )}
-            {project.websiteUrl && (
-              <a href={project.websiteUrl} target="_blank" rel="noopener noreferrer">{copy.visit} <Icon name="external" size={16} /></a>
-            )}
-          </div>
+      <div className="project-card__action">
+        {project.websiteUrl ? (
+          <a
+            className="project-card__visit"
+            href={project.websiteUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label={`${visitLabel} ${project.name}`}
+          >
+            {visitLabel}<Icon name="external" size={16} />
+          </a>
+        ) : (
+          <span className="project-card__visit project-card__visit--static">
+            {visitLabel}<Icon name="external" size={16} />
+          </span>
         )}
       </div>
     </article>
@@ -52,24 +53,9 @@ export function FeaturedWork() {
           <p>{copy.intro}</p>
         </div>
 
-        {projects.length > 0 ? (
-          <div className="project-grid">
-            {projects.map((project) => <ProjectCard key={project.name} project={project} copy={copy} />)}
-          </div>
-        ) : (
-          <div className="work-empty">
-            <div className="work-empty__visual" aria-hidden="true">
-              <img src="/brand/klyx-k-dark.svg" width="106" height="106" alt="" />
-              <span className="work-empty__line" />
-              <span className="mono">{copy.proof}</span>
-            </div>
-            <div className="work-empty__copy">
-              <p className="mono">{copy.library}</p>
-              <h3>{copy.pendingTitle}</h3>
-              <p>{copy.pendingText}</p>
-            </div>
-          </div>
-        )}
+        <div className="project-grid">
+          {projects.map((project) => <ProjectCard key={project.name} project={project} visitLabel={copy.visitShort} />)}
+        </div>
       </div>
     </section>
   )

@@ -19,7 +19,6 @@ function PackageCard({ item, labels, language }) {
         <h3>{item.name}</h3>
         {item.domainIncluded && <span className="domain-badge"><Icon name="domain" size={15} />{item.domainBadge || labels.domainBadge}</span>}
       </div>
-      <p className="explorer-package-price" dir={language === 'en' ? 'ltr' : undefined}>{item.price}</p>
       <p className="explorer-package-best"><span>{labels.bestFor}</span>{item.bestFor}</p>
 
       <div className="explorer-package-scope">
@@ -64,7 +63,8 @@ export function Packages() {
 
     window.requestAnimationFrame(() => {
       const button = serviceButtonRefs.current.get(serviceId)
-      button?.closest('.service-explorer-item')?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+      const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+      button?.closest('.service-explorer-item')?.scrollIntoView({ behavior: reducedMotion ? 'auto' : 'smooth', block: 'start' })
       if (focus) button?.focus({ preventScroll: true })
     })
   }, [])
@@ -145,10 +145,6 @@ export function Packages() {
                       <strong>{service.title}</strong>
                       <small>{service.audience}</small>
                     </span>
-                    <span className="service-explorer-price">
-                      <small>{copy.labels.startingFrom}</small>
-                      <strong dir={language === 'en' ? 'ltr' : undefined}>{service.startingPrice}</strong>
-                    </span>
                     <span className="service-explorer-toggle" aria-hidden="true"><Icon name="plus" size={22} /></span>
                   </button>
                 </h2>
@@ -211,7 +207,6 @@ export function Packages() {
                 {copy.afterLaunch.care.map((item) => (
                   <div className="care-option" key={item.name}>
                     <span>{item.name}</span>
-                    <strong dir={language === 'en' ? 'ltr' : undefined}>{item.price}</strong>
                   </div>
                 ))}
               </div>

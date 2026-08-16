@@ -30,7 +30,6 @@ export function NotFoundPage() {
             <a className="button button--mint" href="/">{copy.back} <Icon name="arrow" size={18} className="rtl-flip" /></a>
           </div>
           <div className="not-found__mark" aria-hidden="true">
-            <img src="/brand/klyx-k-light.svg" width="180" height="180" alt="" />
             <span className="mono">{copy.record}</span>
           </div>
         </div>
