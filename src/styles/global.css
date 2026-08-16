@@ -3402,7 +3402,43 @@ html[data-theme='dark'] .package-card--featured {
   }
 
   .project-grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+  }
+
+  .project-card {
+    display: flex;
+    min-height: 178px;
+    flex-direction: column;
+  }
+
+  .project-card__logo {
+    min-height: 0;
+    height: 110px;
+    padding: 8px 0 0;
+    flex: 0 0 110px;
+  }
+
+  .project-card__client-logo {
+    width: auto;
+    max-width: 100%;
+    max-height: 102px;
+  }
+
+  .project-card--claro .project-card__client-logo {
+    width: auto;
+    max-width: 92%;
+  }
+
+  .project-card__action {
+    padding: 0 12px 14px;
+    margin-top: auto;
+  }
+
+  .project-card__visit {
+    padding: 0 12px;
+    gap: 6px;
+    font-size: 0.75rem;
   }
 
   .support-heading {
@@ -3582,8 +3618,29 @@ html[data-theme='dark'] .package-card--featured {
   }
 
   .project-card__logo {
-    min-height: 228px;
-    padding: 18px 0 0;
+    height: 96px;
+    padding: 6px 0 0;
+    flex-basis: 96px;
+  }
+
+  .project-grid {
+    gap: 10px;
+  }
+
+  .project-card {
+    min-height: 164px;
+  }
+
+  .project-card__client-logo {
+    max-height: 90px;
+  }
+
+  .project-card__action {
+    padding: 0 9px 10px;
+  }
+
+  .project-card__visit {
+    padding: 0 10px;
   }
 
   .package-card {
