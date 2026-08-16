@@ -2,6 +2,7 @@ export const projects = [
   {
     name: 'LAM',
     tone: 'light',
+    surface: 'lam',
     websiteUrl: 'https://lam-studios.com',
     logo: {
       src: '/projects/lam-logo.png',
@@ -12,6 +13,7 @@ export const projects = [
   {
     name: 'GLOWbyHK',
     tone: 'light',
+    surface: 'glowbyhk',
     logo: {
       src: '/projects/glowbyhk-logo.jpg',
       width: 673,
@@ -21,6 +23,7 @@ export const projects = [
   {
     name: 'CLARO',
     tone: 'dark',
+    surface: 'claro',
     logo: {
       src: '/projects/claro-logo.jpg',
       width: 690,

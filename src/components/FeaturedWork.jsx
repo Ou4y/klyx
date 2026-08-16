@@ -5,7 +5,7 @@ import { Icon } from './Icon'
 
 function ProjectCard({ project, visitLabel }) {
   return (
-    <article className={`project-card project-card--${project.tone}`} aria-label={project.name}>
+    <article className={`project-card project-card--${project.tone} project-card--${project.surface}`} aria-label={project.name}>
       <div className="project-card__logo">
         <img
           className="project-card__client-logo"

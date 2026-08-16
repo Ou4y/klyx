@@ -1015,27 +1015,45 @@ h4 {
 }
 
 .project-card--light {
-  background: var(--paper);
   color: var(--ink);
 }
 
 .project-card--dark {
-  background: var(--ink);
   color: var(--paper);
+}
+
+.project-card--lam {
+  background: #eceae2;
+}
+
+.project-card--glowbyhk {
+  background: #d5c1b8;
+}
+
+.project-card--claro {
+  background: #3f1c30;
 }
 
 .project-card__logo {
   display: flex;
   min-height: 270px;
-  padding: clamp(30px, 4vw, 52px);
+  padding: 18px 0 0;
   align-items: center;
   justify-content: center;
+  background: inherit;
 }
 
 .project-card__client-logo {
+  display: block;
   width: 100%;
-  max-height: 154px;
+  height: auto;
+  max-width: none;
+  max-height: none;
   object-fit: contain;
+}
+
+.project-card--claro .project-card__client-logo {
+  width: 92%;
 }
 
 .project-card__action {
@@ -2459,6 +2477,104 @@ html[data-theme='dark'] .package-card--featured {
   animation: vector-shift-b 6.5s ease-in-out infinite alternate;
 }
 
+.service-vector--tools .vector-frame {
+  stroke-width: 1.75;
+}
+
+.service-vector--tools .vector-line {
+  opacity: 0.9;
+}
+
+.tools-panel-header,
+.tools-active-row,
+.tools-team-active,
+.tools-handoff,
+.tools-request-pulse {
+  fill: var(--accent);
+}
+
+.tools-panel-header {
+  opacity: 0.07;
+}
+
+.tools-active-row {
+  opacity: 0.1;
+  animation: tools-active-state 5.4s ease-in-out infinite;
+}
+
+.tools-active-row--status {
+  animation-delay: 0.9s;
+}
+
+.tools-primary,
+.tools-state-check,
+.tools-pending-ring,
+.tools-route,
+.tools-team-pulse {
+  fill: none;
+  stroke: var(--accent);
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.tools-primary {
+  stroke-width: 2;
+}
+
+.tools-route {
+  stroke-width: 1.5;
+  stroke-dasharray: 3 4;
+  opacity: 0.58;
+}
+
+.tools-handoff {
+  opacity: 0;
+  transform-box: fill-box;
+  animation: tools-handoff 4.2s ease-in-out infinite;
+}
+
+.tools-handoff--two {
+  animation-delay: 1.35s;
+}
+
+.tools-state-check {
+  stroke-width: 2;
+  stroke-dasharray: 18;
+  stroke-dashoffset: 18;
+  animation: tools-check-state 5.4s ease-in-out infinite;
+}
+
+.tools-state-check--two {
+  animation-delay: 0.9s;
+}
+
+.tools-pending-ring {
+  stroke-width: 1.75;
+  stroke-dasharray: 4 3;
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: tools-pending-state 6s linear infinite;
+}
+
+.tools-team-active {
+  opacity: 0.24;
+}
+
+.tools-team-pulse,
+.tools-request-pulse {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: tools-data-pulse 4.2s ease-out infinite;
+}
+
+.tools-team-pulse {
+  stroke-width: 1.5;
+}
+
+.tools-request-pulse {
+  animation-delay: 0.35s;
+}
+
 @keyframes vector-flow {
   to { stroke-dashoffset: -52; }
 }
@@ -2469,6 +2585,31 @@ html[data-theme='dark'] .package-card--featured {
 
 @keyframes vector-shift-b {
   to { transform: translate3d(-4px, 4px, 0); }
+}
+
+@keyframes tools-handoff {
+  0%, 12% { opacity: 0; transform: translateX(0); }
+  28%, 72% { opacity: 1; }
+  88%, 100% { opacity: 0; transform: translateX(23px); }
+}
+
+@keyframes tools-check-state {
+  0%, 18% { stroke-dashoffset: 18; opacity: 0.45; }
+  38%, 100% { stroke-dashoffset: 0; opacity: 1; }
+}
+
+@keyframes tools-active-state {
+  0%, 100% { opacity: 0.08; }
+  45%, 68% { opacity: 0.18; }
+}
+
+@keyframes tools-pending-state {
+  to { transform: rotate(360deg); }
+}
+
+@keyframes tools-data-pulse {
+  0%, 35% { opacity: 0.72; transform: scale(0.82); }
+  70%, 100% { opacity: 0; transform: scale(1.24); }
 }
 
 .reveal-ready .reveal-item {
@@ -3442,7 +3583,7 @@ html[data-theme='dark'] .package-card--featured {
 
   .project-card__logo {
     min-height: 228px;
-    padding: 30px 24px;
+    padding: 18px 0 0;
   }
 
   .package-card {
@@ -3589,5 +3730,35 @@ html[dir='rtl'] .delivery-stage__copy .mono {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
+  }
+
+  .tools-active-row,
+  .tools-handoff,
+  .tools-state-check,
+  .tools-pending-ring,
+  .tools-team-pulse,
+  .tools-request-pulse {
+    animation: none !important;
+  }
+
+  .tools-active-row {
+    opacity: 0.14;
+  }
+
+  .tools-handoff {
+    opacity: 1;
+    transform: translateX(11px);
+  }
+
+  .tools-state-check {
+    stroke-dashoffset: 0;
+  }
+
+  .tools-team-pulse {
+    opacity: 0.5;
+  }
+
+  .tools-request-pulse {
+    opacity: 0.78;
   }
 }

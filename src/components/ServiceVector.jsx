@@ -75,25 +75,44 @@ const vectorContent = {
   tools: (
     <>
       <rect className="vector-frame" x="14" y="22" width="102" height="116" rx="5" />
+      <rect className="tools-panel-header" x="14" y="22" width="102" height="25" rx="5" />
       <path className="vector-datum" d="M14 47h102" />
-      <path className="vector-line" d="M30 64h70M30 78h57M30 93h70M30 107h46" />
-      <rect className="vector-surface vector-shift-a" x="29" y="120" width="70" height="9" rx="2" />
+      <circle className="tools-primary" cx="29" cy="34.5" r="3" />
+      <path className="vector-line" d="M39 34.5h40" />
+      <rect className="tools-active-row" x="25" y="58" width="80" height="25" rx="3" />
+      <path className="tools-primary" d="M34 67h43M34 75h29" />
+      <circle className="tools-request-pulse" cx="96" cy="70.5" r="3.5" />
+      <path className="vector-line" d="M30 95h70M30 106h48" />
+      <rect className="vector-surface" x="29" y="119" width="70" height="9" rx="2" />
 
       <rect className="vector-frame" x="149" y="22" width="102" height="116" rx="5" />
+      <rect className="tools-panel-header" x="149" y="22" width="102" height="25" rx="5" />
       <path className="vector-datum" d="M149 47h102" />
-      <path className="vector-line" d="M171 67h62M171 93h62M171 119h62" />
-      <path className="vector-datum" d="m158 67 4 4 7-10M158 93l4 4 7-10" />
-      <rect className="vector-surface vector-shift-b" x="157" y="111" width="11" height="11" rx="2" />
+      <circle className="tools-primary" cx="164" cy="34.5" r="3" />
+      <path className="vector-line" d="M174 34.5h40" />
+      <path className="tools-state-check tools-state-check--one" d="m157 66 4 4 7-10" />
+      <path className="vector-line" d="M174 66h60M174 73h42" />
+      <rect className="tools-active-row tools-active-row--status" x="156" y="82" width="88" height="22" rx="3" />
+      <path className="tools-state-check tools-state-check--two" d="m158 91 4 4 7-10" />
+      <path className="tools-primary" d="M174 91h60M174 98h34" />
+      <circle className="tools-pending-ring" cx="163" cy="119" r="5" />
+      <path className="vector-line" d="M174 116h60M174 123h46" />
 
       <rect className="vector-frame" x="284" y="22" width="102" height="116" rx="5" />
+      <rect className="tools-panel-header" x="284" y="22" width="102" height="25" rx="5" />
       <path className="vector-datum" d="M284 47h102" />
+      <circle className="tools-primary" cx="299" cy="34.5" r="3" />
+      <path className="vector-line" d="M309 34.5h40" />
       <circle className="vector-surface" cx="305" cy="69" r="9" />
-      <circle className="vector-surface" cx="305" cy="96" r="9" />
+      <circle className="tools-team-pulse" cx="305" cy="96" r="12" />
+      <circle className="tools-team-active" cx="305" cy="96" r="9" />
       <circle className="vector-surface" cx="305" cy="123" r="9" />
       <path className="vector-line" d="M321 66h48M321 73h35M321 93h48M321 100h30M321 120h48M321 127h38" />
 
-      <path className="vector-motion" d="M118 80h29M253 80h29" />
-      <path className="vector-motion" d="m138 73 9 7-9 7M273 73l9 7-9 7" />
+      <path className="tools-route" d="M118 80h29M253 80h29" />
+      <path className="tools-primary" d="m138 73 9 7-9 7M273 73l9 7-9 7" />
+      <circle className="tools-handoff tools-handoff--one" cx="121" cy="80" r="3" />
+      <circle className="tools-handoff tools-handoff--two" cx="256" cy="80" r="3" />
     </>
   ),
 }
