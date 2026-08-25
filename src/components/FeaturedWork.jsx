@@ -11,7 +11,7 @@ const projectTones = {
 
 function ProjectCard({ project, visitLabel }) {
   return (
-    <article className={`project-card project-card--${projectTones[project.id]}`} aria-label={project.name}>
+    <article className={`project-card project-card--${projectTones[project.id]} project-card--${project.id}`} aria-label={project.name}>
       <div className="project-card__logo">
         <img
           className="project-card__client-logo"
