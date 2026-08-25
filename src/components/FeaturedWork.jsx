@@ -5,12 +5,14 @@ import { useLocale } from '../i18n/locale-context'
 
 function ProjectCard({ project, copy }) {
   return (
-    <article className="project-card">
-      <div className="project-card__image">
+    <article className={`project-card project-card--${project.id}`}>
+      <div className="project-card__visual">
+        <span className="project-card__record mono">{project.number}</span>
         <img
+          className="project-card__mark"
           src={project.image.src}
           srcSet={project.image.srcSet || undefined}
-          sizes="(max-width: 760px) 100vw, 50vw"
+          sizes="(max-width: 760px) 100vw, (max-width: 1120px) 50vw, 60vw"
           width={project.image.width}
           height={project.image.height}
           alt={project.image.alt}
@@ -21,14 +23,14 @@ function ProjectCard({ project, copy }) {
       <div className="project-card__body">
         <p className="mono">{project.category}</p>
         <h3>{project.name}</h3>
-        <p>{project.contribution}</p>
+        <p className={project.comingSoon ? 'project-card__coming-soon mono' : undefined}>{project.comingSoon ? copy.comingSoon : project.contribution}</p>
         {(project.instagramUrl || project.websiteUrl) && (
           <div className="project-card__actions">
             {project.instagramUrl && (
               <a href={project.instagramUrl} target="_blank" rel="noopener noreferrer">{copy.instagram} <Icon name="external" size={16} /></a>
             )}
             {project.websiteUrl && (
-              <a href={project.websiteUrl} target="_blank" rel="noopener noreferrer">{copy.visit} <Icon name="external" size={16} /></a>
+              <a href={project.websiteUrl} target="_blank" rel="noopener noreferrer" aria-label={`${copy.visit}: ${project.name}`}>{copy.visit} <Icon name="external" size={16} /></a>
             )}
           </div>
         )}

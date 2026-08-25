@@ -41,11 +41,11 @@ export const siteContent = {
       { number: '05', title: 'Internal Tools', summary: 'Simple custom systems that make recurring team work easier to manage.', items: ['Workflow and role discovery', 'Dashboards, processes, and reporting', 'Scoped integrations, testing, and handover'], icon: 'operations', vectorLabel: 'Internal workflow system illustration' },
     ],
     work: {
-      eyebrow: 'Featured work / Evidence over claims', title: 'Work shown only when the facts are ready.',
-      intro: 'Only owner-approved projects, contributions, imagery, and destinations are published here.',
-      proof: 'PROOF / PENDING OWNER REVIEW', library: 'PROJECT LIBRARY / 00', pendingTitle: 'Approved project profiles are being prepared.',
+      eyebrow: 'Selected work / Digital commerce', title: 'Distinct brands. Clear digital experiences.',
+      intro: 'A selected group of fashion and beauty storefronts, each shaped around its own identity.',
+      proof: 'PROOF / PENDING OWNER REVIEW', library: 'PROJECT LIBRARY / 03', pendingTitle: 'Approved project profiles are being prepared.',
       pendingText: 'Client names, screenshots, contributions, and links will appear only after the owner verifies each record. No placeholder clients or unverified results are published.',
-      instagram: 'Instagram', visit: 'Visit online presence',
+      instagram: 'Instagram', visit: 'Visit online presence', comingSoon: 'Coming soon',
     },
     partnership: {
       eyebrow: 'How we work / Clear partnership', title: 'Built around the business. Governed by clear rules.',
@@ -141,11 +141,11 @@ export const siteContent = {
       { number: '05', title: 'الأنظمة الداخلية', summary: 'أنظمة مخصصة وبسيطة تسهّل إدارة العمل المتكرر داخل الفريق.', items: ['اكتشاف مسارات العمل والأدوار', 'لوحات وعمليات وتقارير', 'تكاملات محددة واختبار وتسليم'], icon: 'operations', vectorLabel: 'رسم توضيحي لنظام سير عمل داخلي' },
     ],
     work: {
-      eyebrow: 'أعمالنا / الدليل قبل الادعاء', title: 'نعرض الأعمال فقط عندما تكون الحقائق جاهزة.',
-      intro: 'لا ننشر سوى المشروعات والمساهمات والصور والوجهات التي اعتمدها أصحابها.',
-      proof: 'الدليل / بانتظار مراجعة المالك', library: 'مكتبة المشروعات / 00', pendingTitle: 'يجري إعداد ملفات المشروعات المعتمدة.',
+      eyebrow: 'أعمال مختارة / تجارة رقمية', title: 'علامات مميزة. تجارب رقمية واضحة.',
+      intro: 'مجموعة مختارة من متاجر الأزياء والجمال، صُمم كل منها بما يناسب هويته الخاصة.',
+      proof: 'الدليل / بانتظار مراجعة المالك', library: 'مكتبة المشروعات / 03', pendingTitle: 'يجري إعداد ملفات المشروعات المعتمدة.',
       pendingText: 'لن تظهر أسماء العملاء أو لقطات الشاشة أو المساهمات أو الروابط إلا بعد تحقق المالك من كل سجل. لا ننشر عملاء افتراضيين أو نتائج غير موثقة.',
-      instagram: 'إنستغرام', visit: 'زيارة الموقع',
+      instagram: 'إنستغرام', visit: 'زيارة الموقع', comingSoon: 'قريباً',
     },
     partnership: {
       eyebrow: 'كيف نعمل / شراكة واضحة', title: 'مبني حول العمل. ومحكوم بقواعد واضحة.',
