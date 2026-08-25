@@ -116,7 +116,7 @@ export function Header() {
                 )
               })}
             </nav>
-            <button className="mobile-language" type="button" onClick={() => { toggleLanguage(); closeMenu() }} lang={language === 'en' ? 'ar' : 'en'}>
+            <button className="mobile-language" type="button" aria-label={copy.languageLabel} onClick={() => { toggleLanguage(); closeMenu() }} lang={language === 'en' ? 'ar' : 'en'}>
               {copy.language}
             </button>
             <a className="button button--primary button--full" href="/#contact" onClick={closeMenu}>{copy.start}</a>

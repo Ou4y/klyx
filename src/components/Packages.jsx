@@ -63,7 +63,8 @@ export function Packages() {
 
     window.requestAnimationFrame(() => {
       const button = serviceButtonRefs.current.get(serviceId)
-      button?.closest('.service-explorer-item')?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+      const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+      button?.closest('.service-explorer-item')?.scrollIntoView({ behavior: reducedMotion ? 'auto' : 'smooth', block: 'start' })
       if (focus) button?.focus({ preventScroll: true })
     })
   }, [])

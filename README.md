@@ -50,21 +50,17 @@ Project data belongs in `src/data/projects.js`. Publish only owner-approved fact
 ```js
 {
   name: 'Approved project name',
-  category: 'Approved industry or short category',
-  contribution: 'One concise, evidence-based KLYX contribution',
-  image: {
-    src: '/projects/project-name-1280.webp',
-    srcSet: '/projects/project-name-640.webp 640w, /projects/project-name-1280.webp 1280w',
-    width: 1280,
-    height: 800,
-    alt: 'Meaningful description of the approved project image',
+  tone: 'light',
+  websiteUrl: 'https://approved-project.example',
+  logo: {
+    src: '/projects/project-logo.png',
+    width: 800,
+    height: 400,
   },
-  instagramUrl: '',
-  websiteUrl: '',
 }
 ```
 
-An empty action URL is hidden. External project actions automatically open in a new tab with safe link attributes. Keep image dimensions accurate, provide responsive WebP or AVIF files, and never publish an unverified client, claim, result, screenshot, or link.
+Keep logo dimensions accurate, use `tone` only to provide suitable card contrast, omit `websiteUrl` until the destination is approved, and never publish an unverified client, claim, result, screenshot, or link.
 
 ## Update services and packages safely
 
