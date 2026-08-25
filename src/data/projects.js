@@ -16,6 +16,7 @@ export const projects = [
     },
     instagramUrl: '',
     websiteUrl: 'https://lam-studios.com',
+    websiteLabel: 'lam-studios.com',
   },
   {
     id: 'glow-by-hk',
@@ -48,6 +49,7 @@ export const projects = [
       alt: 'CLARO logo',
     },
     instagramUrl: '',
-    websiteUrl: '',
+    websiteUrl: 'https://claro-wear.com',
+    websiteLabel: 'claro-wear.com',
   },
 ]

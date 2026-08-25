@@ -3878,103 +3878,134 @@ html[dir='rtl'] .delivery-stage__copy .mono {
   }
 }
 
-/* Approved visual restoration: Work (3742986/a5f20ef) and Service Explorer (25c81e2) */
+/* Work index: an editorial register for selected client identities. */
 .project-grid {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 24px;
+  gap: 0;
+  border-block-start: 1px solid var(--border);
 }
 
 .project-card {
-  display: flex;
+  display: grid;
   min-width: 0;
-  min-height: 0;
-  border: 0;
-  border-radius: 18px;
-  grid-column: auto;
-  flex-direction: column;
-  overflow: hidden;
+  min-height: 224px;
+  grid-template-columns: minmax(64px, 0.2fr) minmax(250px, 1.3fr) minmax(170px, 0.8fr) minmax(170px, 0.8fr);
+  grid-column: 1 / -1;
+  border-block-end: 1px solid var(--border);
+  color: var(--foreground);
 }
 
-.project-card--light {
-  background: var(--paper);
-  color: var(--ink);
+.project-card__record {
+  position: static;
+  display: flex;
+  padding: 24px 16px;
+  border-inline-end: 1px solid var(--border);
+  align-items: flex-start;
 }
 
-.project-card--dark {
-  background: var(--ink);
-  color: var(--paper);
-}
-
-.project-card--lam {
-  background: #eceae2;
-}
-
-.project-card--glow-by-hk {
-  background: #d5c1b8;
-}
-
-.project-card--claro {
-  background: #3f1c30;
+.project-card__number {
+  margin: 0;
+  color: var(--accent);
+  direction: ltr;
+  font-size: 0.66rem;
+  line-height: 1.2;
+  white-space: nowrap;
 }
 
 .project-card__logo {
   display: flex;
-  min-height: 270px;
-  padding: 18px 0 0;
+  min-width: 0;
+  min-height: 224px;
+  padding: 30px clamp(22px, 4vw, 56px);
+  border-inline-end: 1px solid var(--border);
   align-items: center;
   justify-content: center;
-  background: inherit;
+}
+
+.project-card--lam .project-card__logo {
+  background: #eceae2;
+}
+
+.project-card--glow-by-hk .project-card__logo {
+  background: #d9c2b8;
+}
+
+.project-card--claro .project-card__logo {
+  background: #3f1c30;
 }
 
 .project-card__client-logo {
   display: block;
   width: 100%;
   height: auto;
-  max-width: none;
-  max-height: none;
+  max-width: 100%;
+  max-height: 180px;
   object-fit: contain;
 }
 
+.project-card--lam .project-card__client-logo {
+  width: 88%;
+}
+
+.project-card--glow-by-hk .project-card__client-logo {
+  width: 100%;
+}
+
 .project-card--claro .project-card__client-logo {
-  width: 92%;
+  width: 96%;
+}
+
+.project-card__identity {
+  display: flex;
+  min-width: 0;
+  padding: 28px;
+  border-inline-end: 1px solid var(--border);
+  align-items: center;
+  justify-content: center;
+}
+
+.project-card__name {
+  margin: 0;
+  color: var(--foreground);
+  font-size: clamp(1.35rem, 2.4vw, 2.4rem);
+  letter-spacing: -0.04em;
+  line-height: 1;
 }
 
 .project-card__action {
   display: flex;
-  padding: 0 28px 28px;
+  min-width: 0;
+  padding: 28px 26px;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-end;
+  gap: 16px;
 }
 
 .project-card__visit {
   display: inline-flex;
+  min-width: 0;
   min-height: 44px;
-  padding: 0 16px;
-  border: 1px solid currentColor;
-  border-radius: 999px;
+  padding: 0 0 8px;
+  border: 0;
+  border-bottom: 1px solid currentColor;
   align-items: center;
   gap: 8px;
-  color: inherit;
-  font-size: 0.8rem;
+  color: var(--accent);
+  font-size: 0.72rem;
   font-weight: 600;
+  line-height: 1.25;
   text-decoration: none;
+  white-space: nowrap;
 }
 
 a.project-card__visit {
-  transition: background-color 160ms ease, color 160ms ease;
-}
-
-.project-card--light a.project-card__visit:hover {
-  background: var(--ink);
-  color: var(--paper);
-}
-
-.project-card--dark a.project-card__visit:hover {
-  background: var(--paper);
-  color: var(--ink);
+  transition: color 160ms ease, border-color 160ms ease;
 }
 
 .project-card__visit--static {
-  opacity: 0.58;
+  border-bottom-color: var(--border);
+  color: var(--text-secondary);
 }
 
 .service-explorer .section-heading {
@@ -4316,7 +4347,7 @@ a.project-card__visit {
 
 @media (max-width: 1120px) {
   .project-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-columns: 1fr;
   }
 
   .explorer-package-grid {
@@ -4352,41 +4383,53 @@ a.project-card__visit {
 
 @media (max-width: 720px) {
   .project-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 12px;
+    grid-template-columns: 1fr;
   }
 
   .project-card {
-    min-height: 178px;
+    min-height: 0;
+    grid-template-columns: 64px minmax(0, 1fr);
+  }
+
+  .project-card__record {
+    grid-row: 1 / span 3;
+    padding: 22px 12px;
   }
 
   .project-card__logo {
-    height: 110px;
-    min-height: 0;
-    padding: 8px 0 0;
-    flex: 0 0 110px;
+    min-height: 206px;
+    padding: 28px 20px;
+    border-inline-end: 0;
   }
 
   .project-card__client-logo {
-    width: auto;
     max-width: 100%;
-    max-height: 102px;
+    max-height: 170px;
   }
 
-  .project-card--claro .project-card__client-logo {
-    width: auto;
-    max-width: 92%;
+  .project-card__identity {
+    padding: 18px 20px 16px;
+    border-inline-end: 0;
+    border-block-start: 1px solid var(--border);
+  }
+
+  .project-card__name {
+    font-size: clamp(1.35rem, 8vw, 2rem);
   }
 
   .project-card__action {
-    margin-top: auto;
-    padding: 0 12px 14px;
+    min-height: 0;
+    padding: 15px 20px 18px;
+    border-block-start: 1px solid var(--border);
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
   }
 
   .project-card__visit {
-    padding: 0 12px;
-    gap: 6px;
-    font-size: 0.75rem;
+    min-height: 40px;
+    gap: 7px;
+    font-size: 0.7rem;
   }
 
   .service-explorer .section-heading {
@@ -4439,29 +4482,24 @@ a.project-card__visit {
 
 @media (max-width: 390px) {
   .project-card__logo {
-    height: 96px;
-    padding: 6px 0 0;
-    flex-basis: 96px;
-  }
-
-  .project-grid {
-    gap: 10px;
-  }
-
-  .project-card {
-    min-height: 164px;
+    min-height: 186px;
+    padding: 24px 16px;
   }
 
   .project-card__client-logo {
-    max-height: 90px;
+    max-height: 150px;
+  }
+
+  .project-card__record {
+    padding-inline: 10px;
+  }
+
+  .project-card__identity {
+    padding-inline: 16px;
   }
 
   .project-card__action {
-    padding: 0 9px 10px;
-  }
-
-  .project-card__visit {
-    padding: 0 10px;
+    padding: 14px 16px 16px;
   }
 
   .explorer-chapter-accordion > h3 > button > span {

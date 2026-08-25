@@ -9,21 +9,29 @@ const projectTones = {
   claro: 'dark',
 }
 
-function ProjectCard({ project, visitLabel }) {
+function ProjectCard({ project, visitLabel, comingSoonLabel }) {
+  const websiteLabel = project.websiteLabel || project.websiteUrl
+
   return (
     <article className={`project-card project-card--${projectTones[project.id]} project-card--${project.id}`} aria-label={project.name}>
+      <div className="project-card__record">
+        <p className="project-card__number mono">{project.number}</p>
+      </div>
       <div className="project-card__logo">
         <img
           className="project-card__client-logo"
           src={project.image.src}
           srcSet={project.image.srcSet || undefined}
-          sizes="(max-width: 720px) calc(100vw - 40px), (max-width: 1120px) 50vw, 33vw"
+          sizes="(max-width: 720px) calc(100vw - 84px), (max-width: 1120px) 44vw, 34vw"
           width={project.image.width}
           height={project.image.height}
           alt={project.image.alt}
           loading="lazy"
           decoding="async"
         />
+      </div>
+      <div className="project-card__identity">
+        <p className="project-card__name">{project.name}</p>
       </div>
       <div className="project-card__action">
         {project.websiteUrl ? (
@@ -32,13 +40,13 @@ function ProjectCard({ project, visitLabel }) {
             href={project.websiteUrl}
             target="_blank"
             rel="noopener noreferrer"
-            aria-label={`${visitLabel} ${project.name}`}
+            aria-label={`${visitLabel} ${websiteLabel}`}
           >
-            {visitLabel}<Icon name="external" size={16} />
+            <span dir="ltr">{websiteLabel}</span><Icon name="external" size={15} />
           </a>
         ) : (
-          <span className="project-card__visit project-card__visit--static">
-            {visitLabel}<Icon name="external" size={16} />
+          <span className="project-card__visit project-card__visit--static" aria-label={comingSoonLabel}>
+            {comingSoonLabel}
           </span>
         )}
       </div>
@@ -62,7 +70,14 @@ export function FeaturedWork() {
         </div>
 
         <div className="project-grid">
-          {projects.map((project) => <ProjectCard key={project.name} project={project} visitLabel={copy.visitShort} />)}
+          {projects.map((project) => (
+            <ProjectCard
+              key={project.name}
+              project={project}
+              visitLabel={copy.visitShort}
+              comingSoonLabel={copy.comingSoon}
+            />
+          ))}
         </div>
       </div>
     </section>
