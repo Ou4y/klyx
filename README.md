@@ -38,7 +38,7 @@ The supplied KLYX WhatsApp, telephone, Gmail, Instagram, and TikTok destinations
 
 Verify before a public launch:
 
-- Every public package name, price, feature, and scope note in `src/data/serviceExplorer.js`
+- Every public package name, feature, qualification, and scope note in the Service Explorer data
 - Final owner and Egyptian-counsel review of the substantive Privacy Policy and Website Terms
 - All official project records and their evidence
 - Final canonical domain and host redirect
@@ -64,11 +64,11 @@ Keep logo dimensions accurate, use `tone` only to provide suitable card contrast
 
 ## Update services and packages safely
 
-All five service categories, package details, prices, domain badges, launch support rules, care options, and their Arabic translations live in `src/data/serviceExplorer.js`. Domain badges are intentionally limited to the five approved second-tier packages. Any new commercial copy should be owner-approved before deployment; external costs and operating authority must remain explicit.
+All five service categories, package details, domain badges, launch-care rules, continuing-care options, Commerce Operations, specialist modules, and their Arabic translations live in `src/data/serviceExplorerEn.js` and `src/data/serviceExplorerAr.js`, assembled by `src/data/serviceExplorer.js`. Domain badges remain limited to eligible packages. Any new commercial copy should be owner-approved before deployment; external costs and operating authority must remain explicit. Public package-cost data must not be added to the frontend.
 
 ## Content and localization architecture
 
-Repeated page content is centralized in `src/data/siteContent.js`, service pricing is centralized in `src/data/serviceExplorer.js`, and the legal notices live in `src/data/legal.js` and `src/data/legalAr.js`. The locale provider persists the visitor’s selection and applies document-level `lang` and `dir`; both LTR and RTL layouts are included. Review both languages whenever visible copy changes.
+Repeated page content is centralized in `src/data/siteContent.js`, the complete bilingual Service Explorer scope is centralized in its English and Arabic data files, and the legal notices live in `src/data/legal.js` and `src/data/legalAr.js`. The locale provider persists the visitor’s selection and applies document-level `lang` and `dir`; both LTR and RTL layouts are included. Review both languages whenever visible copy changes.
 
 ## Brand source
 

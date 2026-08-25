@@ -107,7 +107,7 @@ export const legalNotices = {
         title: '1. Using this website',
         paragraphs: [
           'By accessing this website, you agree to use it lawfully and consistently with these Website Terms. If you do not agree, you should stop using the website.',
-          'The website provides general information about KLYX, its approach, services, package starting prices, and contact process. It is not professional legal, tax, accounting, financial, or platform advice for a particular business.',
+          'The website provides general information about KLYX, its approach, services, public package structure, and contact process. It is not professional legal, tax, accounting, financial, or platform advice for a particular business.',
         ],
       },
       {
@@ -115,19 +115,19 @@ export const legalNotices = {
         title: '2. Services and written scope',
         paragraphs: [
           'Website descriptions are summaries, not a promise of unlimited capacity or a binding service commitment. Every project or continuing service depends on a written scope, client responsibilities, access, timing, operating capacity, and authority rules.',
-          'KLYX may build commerce stores, landing pages, portfolio websites, corporate websites, and internal tools, and may provide selected continuing care or commerce operations only to the extent agreed in writing. Pricing, refund, payment, legal, and commercial exceptions remain subject to the applicable written approval rules.',
+          'KLYX may build commerce stores, landing pages, portfolio websites, corporate websites, and internal tools, and may provide selected continuing care or commerce operations only to the extent agreed in writing. Refund, payment, legal, and exceptional commercial decisions remain subject to the applicable written approval rules.',
         ],
       },
       {
-        id: 'pricing',
-        title: '3. Package prices and external costs',
+        id: 'scope-costs',
+        title: '3. Scope, care, and external costs',
         paragraphs: [
-          'Prices marked “from” are standard public starting points, not a final quotation or an offer capable of acceptance. Catalogue size, integrations, language needs, content readiness, platform condition, and project complexity affect final scope and price.',
+          'Public package descriptions are informational summaries, not a final proposal or an offer capable of acceptance. Catalogue size, integrations, language needs, content readiness, platform condition, and project complexity affect the final written scope.',
         ],
         list: [
           'Operations includes Technical Maintenance when stated in the selected scope.',
           'Unused monthly revisions do not bank.',
-          'New features, large redesigns, custom development, and major integrations are quoted separately.',
+          'New features, large redesigns, custom development, and major integrations require a separate written scope.',
           'Platform subscriptions, payment-provider fees, advertising spend, production, delivery, equipment, and third-party tools are separate unless explicitly included in writing.',
           'Continuing care requires an active agreement after an included package period ends.',
           'A one-year standard domain benefit applies only to the selected packages identified on the website, remains subject to availability, excludes premium or unusually expensive domains, and does not include renewal after the first year.',
