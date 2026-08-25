@@ -1,8 +1,31 @@
-import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
+import { useCallback, useEffect, useRef, useState } from 'react'
 import { siteConfig } from '../config/site'
 import { serviceExplorerContent } from '../data/serviceExplorer'
 import { useLocale } from '../i18n/locale-context'
 import { Icon } from './Icon'
+
+const shortcutLabels = {
+  en: {
+    label: 'Choose by audience',
+    items: {
+      commerce: 'For brands & store owners',
+      'landing-pages': 'For campaigns & offers',
+      portfolio: 'For individuals',
+      corporate: 'For companies',
+      'internal-tools': 'For teams',
+    },
+  },
+  ar: {
+    label: 'اختر حسب احتياجك',
+    items: {
+      commerce: 'للعلامات التجارية وأصحاب المتاجر',
+      'landing-pages': 'للحملات والعروض',
+      portfolio: 'للأفراد',
+      corporate: 'للشركات',
+      'internal-tools': 'لفِرَق العمل',
+    },
+  },
+}
 
 function getWhatsAppUrl(packageName, language) {
   const message = language === 'ar'
@@ -27,22 +50,24 @@ function ScopeList({ items, icon = 'check' }) {
   )
 }
 
-function DetailGroup({ title, items, tone = 'standard' }) {
+function DetailGroup({ title, items, tone = 'standard', headingLevel = 4 }) {
   if (!items?.length) return null
+
+  const Heading = headingLevel === 5 ? 'h5' : 'h4'
 
   return (
     <section className={`explorer-detail-group explorer-detail-group--${tone}`}>
-      <h4>{title}</h4>
+      <Heading>{title}</Heading>
       <ScopeList items={items} icon={tone === 'exclusion' ? 'close' : tone === 'qualification' ? 'info' : 'check'} />
     </section>
   )
 }
 
-function DisclosureSummary({ labels }) {
+function DisclosureSummary({ labels, packageScope = false }) {
   return (
     <summary>
-      <span className="explorer-disclosure__closed">{labels.viewDetails}</span>
-      <span className="explorer-disclosure__open">{labels.hideDetails}</span>
+      <span className="explorer-disclosure__closed">{packageScope ? labels.viewScope : labels.viewDetails}</span>
+      <span className="explorer-disclosure__open">{packageScope ? labels.hideScope : labels.hideDetails}</span>
       <Icon name="chevron" size={19} />
     </summary>
   )
@@ -66,22 +91,18 @@ function PackageCard({ item, labels, language }) {
         {item.bestFor}
       </p>
 
-      <div className="explorer-launch-care">
-        <Icon name="care" size={18} />
-        <p><span>{labels.launchCare}</span>{item.launchCare}</p>
-      </div>
-
-      <div className="explorer-key-scope">
+      <div className="explorer-package-scope">
         <p className="mono">{labels.keyScope}</p>
         <ScopeList items={item.inclusions.slice(0, 3)} />
       </div>
 
+      <p className="explorer-package-support">
+        <Icon name="care" size={18} />
+        <span><strong>{labels.launchCare}</strong>{item.launchCare}</span>
+      </p>
+
       <details className="explorer-disclosure explorer-package-disclosure">
-        <summary>
-          <span className="explorer-disclosure__closed">{labels.viewScope}</span>
-          <span className="explorer-disclosure__open">{labels.hideScope}</span>
-          <Icon name="chevron" size={19} />
-        </summary>
+        <DisclosureSummary labels={labels} packageScope />
         <div className="explorer-disclosure__body">
           <DetailGroup title={labels.completeScope} items={item.inclusions} />
           <DetailGroup title={labels.exclusions} items={item.exclusions} tone="exclusion" />
@@ -103,122 +124,121 @@ function PackageCard({ item, labels, language }) {
   )
 }
 
-function ChapterHeading({ eyebrow, title, intro, id }) {
-  return (
-    <div className="explorer-chapter__heading">
-      <p className="eyebrow">{eyebrow}</p>
-      <h3 id={id}>{title}</h3>
-      {intro && <p>{intro}</p>}
-    </div>
-  )
-}
+function ScopeCard({ item, labels, variant = 'standard', index }) {
+  const isOperations = variant === 'operations'
 
-function CareCard({ item, labels }) {
   return (
-    <article className="explorer-scope-card">
-      <h4>{item.name}</h4>
-      <p className="explorer-package-best"><span>{labels.bestFor}</span>{item.bestFor}</p>
+    <article className={`explorer-package-card explorer-aux-card explorer-aux-card--${variant}`}>
+      {isOperations ? (
+        <div className="explorer-operations-card__head">
+          <span className="mono">{String(index + 1).padStart(2, '0')}</span>
+          <span className="explorer-operations-card__icon"><Icon name={item.icon} size={22} /></span>
+          <div>
+            <p className="mono">{item.responsibility}</p>
+            <h4>{item.name}</h4>
+          </div>
+        </div>
+      ) : (
+        <h4>{item.name}</h4>
+      )}
+
+      {item.bestFor && <p className="explorer-package-best"><span>{labels.bestFor}</span>{item.bestFor}</p>}
+      {item.intro && <p className="explorer-aux-card__intro">{item.intro}</p>}
+
       <details className="explorer-disclosure">
         <DisclosureSummary labels={labels} />
         <div className="explorer-disclosure__body">
-          <DetailGroup title={labels.includes} items={item.inclusions} />
-          <DetailGroup title={labels.exclusions} items={item.exclusions} tone="exclusion" />
-          <DetailGroup title={labels.qualifications} items={item.qualifications} tone="qualification" />
+          <DetailGroup title={labels.includes} items={item.inclusions} headingLevel={5} />
+          <DetailGroup title={labels.exclusions} items={item.exclusions} tone="exclusion" headingLevel={5} />
+          <DetailGroup title={labels.channels} items={item.channels} headingLevel={5} />
+          <DetailGroup title={labels.channelRegister} items={item.channelRegister} tone="qualification" headingLevel={5} />
+          <DetailGroup title={labels.operatingStandard} items={item.operatingStandard} tone="qualification" headingLevel={5} />
+          <DetailGroup title={labels.authority} items={item.authority} tone="exclusion" headingLevel={5} />
+          <DetailGroup title={labels.qualifications} items={item.qualifications} tone="qualification" headingLevel={5} />
         </div>
       </details>
     </article>
   )
 }
 
-function OperationsCard({ item, labels, index }) {
+function ChapterAccordion({ id, section, isOpen, onToggle, children }) {
+  const buttonId = `${id}-button`
+  const panelId = `${id}-panel`
+
   return (
-    <article className="operations-card">
-      <div className="operations-card__head">
-        <span className="operations-card__index mono">{String(index + 1).padStart(2, '0')}</span>
-        <span className="operations-card__icon"><Icon name={item.icon} size={24} /></span>
-        <div>
-          <p className="mono">{item.responsibility}</p>
-          <h4>{item.name}</h4>
+    <section className={`after-launch explorer-chapter-accordion ${isOpen ? 'is-open' : ''}`} aria-labelledby={buttonId}>
+      <h3>
+        <button id={buttonId} type="button" aria-expanded={isOpen} aria-controls={panelId} onClick={onToggle}>
+          <span><span className="mono">{section.eyebrow}</span>{section.title}</span>
+          <Icon name="chevron" size={21} />
+        </button>
+      </h3>
+      <div id={panelId} className="after-launch__panel" role="region" aria-labelledby={buttonId} aria-hidden={!isOpen} inert={!isOpen ? true : undefined}>
+        <div className="after-launch__inner explorer-chapter-body">
+          {section.intro && <p className="after-launch__intro">{section.intro}</p>}
+          {children}
         </div>
       </div>
-      <p className="explorer-package-best"><span>{labels.bestFor}</span>{item.bestFor}</p>
-      {item.intro && <p className="operations-card__intro">{item.intro}</p>}
-      <details className="explorer-disclosure">
-        <DisclosureSummary labels={labels} />
-        <div className="explorer-disclosure__body">
-          <DetailGroup title={labels.includes} items={item.inclusions} />
-          <DetailGroup title={labels.exclusions} items={item.exclusions} tone="exclusion" />
-          <DetailGroup title={labels.channels} items={item.channels} />
-          <DetailGroup title={labels.channelRegister} items={item.channelRegister} tone="qualification" />
-          <DetailGroup title={labels.operatingStandard} items={item.operatingStandard} tone="qualification" />
-          <DetailGroup title={labels.authority} items={item.authority} tone="exclusion" />
-          <DetailGroup title={labels.qualifications} items={item.qualifications} tone="qualification" />
-        </div>
-      </details>
-    </article>
-  )
-}
-
-function ModuleCard({ item, labels }) {
-  return (
-    <article className="module-card">
-      <h4>{item.name}</h4>
-      {item.bestFor && <p className="explorer-package-best"><span>{labels.bestFor}</span>{item.bestFor}</p>}
-      <details className="explorer-disclosure">
-        <DisclosureSummary labels={labels} />
-        <div className="explorer-disclosure__body">
-          <DetailGroup title={labels.includes} items={item.inclusions} />
-          <DetailGroup title={labels.exclusions} items={item.exclusions} tone="exclusion" />
-          <DetailGroup title={labels.qualifications} items={item.qualifications} tone="qualification" />
-        </div>
-      </details>
-    </article>
+    </section>
   )
 }
 
 export function Packages() {
   const { language } = useLocale()
   const copy = serviceExplorerContent[language]
-  const categoryIds = useMemo(() => copy.categories.map((category) => category.id), [copy.categories])
-  const [selectedCategoryId, setSelectedCategoryId] = useState(() => {
+  const shortcuts = shortcutLabels[language]
+  const [openServiceId, setOpenServiceId] = useState(() => {
     const hash = window.location.hash.slice(1)
-    return categoryIds.includes(hash) ? hash : categoryIds[0]
+    return copy.categories.some((category) => category.id === hash) ? hash : null
   })
-  const tabRefs = useRef(new Map())
+  const [openChapterIds, setOpenChapterIds] = useState(() => new Set())
+  const serviceButtonRefs = useRef(new Map())
 
-  const selectCategory = useCallback((categoryId, { focus = false, updateHash = true } = {}) => {
-    setSelectedCategoryId(categoryId)
+  const openAndFocusService = useCallback((serviceId, { updateHash = true, focus = true } = {}) => {
+    setOpenServiceId(serviceId)
+
     if (updateHash) {
-      window.history.replaceState(null, '', `${window.location.pathname}${window.location.search}#${categoryId}`)
+      window.history.replaceState(null, '', `${window.location.pathname}${window.location.search}#${serviceId}`)
     }
-    if (focus) window.requestAnimationFrame(() => tabRefs.current.get(categoryId)?.focus())
+
+    window.requestAnimationFrame(() => {
+      const button = serviceButtonRefs.current.get(serviceId)
+      const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+      button?.closest('.service-explorer-item')?.scrollIntoView({ behavior: reducedMotion ? 'auto' : 'smooth', block: 'start' })
+      if (focus) button?.focus({ preventScroll: true })
+    })
   }, [])
 
   useEffect(() => {
     const handleHash = () => {
-      const categoryId = window.location.hash.slice(1)
-      if (categoryIds.includes(categoryId)) selectCategory(categoryId, { updateHash: false })
+      const serviceId = window.location.hash.slice(1)
+      if (copy.categories.some((category) => category.id === serviceId)) {
+        openAndFocusService(serviceId, { updateHash: false, focus: false })
+      }
     }
 
     handleHash()
     window.addEventListener('hashchange', handleHash)
     return () => window.removeEventListener('hashchange', handleHash)
-  }, [categoryIds, selectCategory])
+  }, [copy.categories, openAndFocusService])
 
-  const selectedCategory = copy.categories.find((category) => category.id === selectedCategoryId) || copy.categories[0]
+  const toggleService = (serviceId) => {
+    if (openServiceId === serviceId) {
+      setOpenServiceId(null)
+      window.history.replaceState(null, '', `${window.location.pathname}${window.location.search}#packages`)
+      return
+    }
 
-  const handleTabKeyDown = (event, currentIndex) => {
-    const rtlDirection = language === 'ar' ? -1 : 1
-    let nextIndex = null
+    openAndFocusService(serviceId, { focus: false })
+  }
 
-    if (event.key === 'ArrowRight') nextIndex = (currentIndex + rtlDirection + categoryIds.length) % categoryIds.length
-    if (event.key === 'ArrowLeft') nextIndex = (currentIndex - rtlDirection + categoryIds.length) % categoryIds.length
-    if (event.key === 'Home') nextIndex = 0
-    if (event.key === 'End') nextIndex = categoryIds.length - 1
-    if (nextIndex === null) return
-
-    event.preventDefault()
-    selectCategory(categoryIds[nextIndex], { focus: true })
+  const toggleChapter = (chapterId) => {
+    setOpenChapterIds((current) => {
+      const next = new Set(current)
+      if (next.has(chapterId)) next.delete(chapterId)
+      else next.add(chapterId)
+      return next
+    })
   }
 
   return (
@@ -232,124 +252,120 @@ export function Packages() {
           <p>{copy.intro}</p>
         </div>
 
-        <section className="explorer-build" aria-labelledby="build-packages-title">
-          <div className="explorer-build__meta">
-            <p className="eyebrow">01 / {copy.labels.buildPackages}</p>
-            <h3 id="build-packages-title">{copy.labels.chooseCategory}</h3>
+        <nav className="audience-shortcuts" aria-label={shortcuts.label}>
+          {copy.categories.map((category) => (
+            <button
+              type="button"
+              className={openServiceId === category.id ? 'is-active' : ''}
+              aria-pressed={openServiceId === category.id}
+              onClick={() => openAndFocusService(category.id)}
+              key={category.id}
+            >
+              <Icon name={category.icon} size={22} />
+              <span>{shortcuts.items[category.id]}</span>
+              <Icon name="arrow" size={17} className="rtl-flip audience-shortcut__arrow" />
+            </button>
+          ))}
+        </nav>
+
+        <div className="service-explorer-list">
+          {copy.categories.map((category, index) => {
+            const isOpen = openServiceId === category.id
+            const buttonId = `${category.id}-button`
+            const panelId = `${category.id}-panel`
+
+            return (
+              <article className={`service-explorer-item ${isOpen ? 'is-open' : ''}`} id={category.id} key={category.id}>
+                <h2 className="service-explorer-item__heading">
+                  <button
+                    ref={(element) => {
+                      if (element) serviceButtonRefs.current.set(category.id, element)
+                      else serviceButtonRefs.current.delete(category.id)
+                    }}
+                    id={buttonId}
+                    type="button"
+                    aria-expanded={isOpen}
+                    aria-controls={panelId}
+                    onClick={() => toggleService(category.id)}
+                  >
+                    <span className="service-explorer-index mono">{String(index + 1).padStart(2, '0')}</span>
+                    <span className="service-explorer-icon"><Icon name={category.icon} size={26} /></span>
+                    <span className="service-explorer-summary">
+                      <strong>{category.title}</strong>
+                      <small>{category.audience}</small>
+                    </span>
+                    <span className="service-explorer-toggle" aria-hidden="true"><Icon name="plus" size={22} /></span>
+                  </button>
+                </h2>
+
+                <div className="service-explorer-panel" id={panelId} role="region" aria-labelledby={buttonId} aria-hidden={!isOpen} inert={!isOpen ? true : undefined}>
+                  <div className="service-explorer-panel__inner">
+                    {category.guidedTitle && (
+                      <div className="service-guidance">
+                        <h3>{category.guidedTitle}</h3>
+                        <p>{category.note}</p>
+                      </div>
+                    )}
+
+                    <div className={`explorer-package-grid ${category.packages.length === 4 ? 'explorer-package-grid--four' : ''}`}>
+                      {category.packages.map((item) => (
+                        <PackageCard item={item} labels={copy.labels} language={language} key={item.id} />
+                      ))}
+                    </div>
+
+                    {!category.guidedTitle && category.note && <p className="service-explorer-note"><Icon name="info" size={18} /><span>{category.note}</span></p>}
+                  </div>
+                </div>
+              </article>
+            )
+          })}
+        </div>
+
+        <aside className="domain-rule" aria-labelledby="domain-rule-title">
+          <div>
+            <p className="mono">{copy.domain.eyebrow}</p>
+            <h3 id="domain-rule-title">{copy.domain.title}</h3>
           </div>
+          <ul>
+            {copy.domain.items.map((item) => <li key={item}><Icon name="info" size={17} /><span>{item}</span></li>)}
+            <li><Icon name="info" size={17} /><span><strong>{copy.thirdParty.eyebrow}:</strong> {copy.thirdParty.text}</span></li>
+          </ul>
+        </aside>
 
-          <div className="explorer-tabs" role="tablist" aria-label={copy.labels.chooseCategory}>
-            {copy.categories.map((category, index) => {
-              const isSelected = selectedCategory.id === category.id
-              return (
-                <button
-                  type="button"
-                  role="tab"
-                  id={`${category.id}-tab`}
-                  aria-controls={`${category.id}-panel`}
-                  aria-selected={isSelected}
-                  tabIndex={isSelected ? 0 : -1}
-                  className={isSelected ? 'is-active' : ''}
-                  onClick={() => selectCategory(category.id)}
-                  onKeyDown={(event) => handleTabKeyDown(event, index)}
-                  ref={(element) => {
-                    if (element) tabRefs.current.set(category.id, element)
-                    else tabRefs.current.delete(category.id)
-                  }}
-                  key={category.id}
-                >
-                  <span className="mono">{String(index + 1).padStart(2, '0')}</span>
-                  <Icon name={category.icon} size={22} />
-                  <span>{category.title}</span>
-                </button>
-              )
-            })}
-          </div>
-
-          <div
-            className={`explorer-category-panel ${selectedCategory.id === 'internal-tools' ? 'explorer-category-panel--guided' : ''}`}
-            id={`${selectedCategory.id}-panel`}
-            role="tabpanel"
-            aria-labelledby={`${selectedCategory.id}-tab`}
-            tabIndex={0}
-          >
-            <div className="explorer-category-intro">
-              <div>
-                <p className="mono">{selectedCategory.title}</p>
-                <h3>{selectedCategory.guidedTitle || selectedCategory.audience}</h3>
-              </div>
-              {selectedCategory.guidedTitle && <p>{selectedCategory.audience}</p>}
-            </div>
-            {selectedCategory.guidedTitle && selectedCategory.note && <p className="explorer-guided-note"><Icon name="info" size={18} />{selectedCategory.note}</p>}
-            {!selectedCategory.guidedTitle && selectedCategory.note && <p className="explorer-category-note"><Icon name="info" size={18} />{selectedCategory.note}</p>}
-
-            <div className={`explorer-package-grid ${selectedCategory.packages.length === 4 ? 'explorer-package-grid--four' : ''}`}>
-              {selectedCategory.packages.map((item) => (
-                <PackageCard item={item} labels={copy.labels} language={language} key={item.id} />
-              ))}
-            </div>
-          </div>
-
-          <div className="explorer-rules-grid">
-            <aside className="explorer-rule-card" aria-labelledby="domain-rule-title">
-              <p className="mono">{copy.domain.eyebrow}</p>
-              <h3 id="domain-rule-title">{copy.domain.title}</h3>
-              <ScopeList items={copy.domain.items} icon="info" />
-            </aside>
-            <aside className="explorer-rule-card explorer-rule-card--accent" aria-labelledby="third-party-rule-title">
-              <p className="mono">{copy.thirdParty.eyebrow}</p>
-              <h3 id="third-party-rule-title">{copy.thirdParty.text}</h3>
-            </aside>
-          </div>
-        </section>
-
-        <section className="explorer-chapter" aria-labelledby="launch-care-title">
-          <ChapterHeading {...copy.launchCare} id="launch-care-title" />
+        <ChapterAccordion id="launch-care" section={copy.launchCare} isOpen={openChapterIds.has('launch-care')} onToggle={() => toggleChapter('launch-care')}>
           <div className="launch-care-layout">
             <dl className="launch-care-list">
-              {copy.launchCare.entries.map(([name, care]) => (
-                <div key={name}>
-                  <dt>{name}</dt>
-                  <dd>{care}</dd>
-                </div>
-              ))}
+              {copy.launchCare.entries.map(([name, care]) => <div key={name}><dt>{name}</dt><dd>{care}</dd></div>)}
             </dl>
-            <aside className="launch-care-rules">
-              <ScopeList items={copy.launchCare.rules} icon="info" />
-            </aside>
+            <aside className="launch-care-rules"><ScopeList items={copy.launchCare.rules} icon="info" /></aside>
           </div>
-        </section>
+        </ChapterAccordion>
 
-        <section className="explorer-chapter" aria-labelledby="continuing-care-title">
-          <ChapterHeading {...copy.continuingCare} id="continuing-care-title" />
-          <div className="explorer-card-grid explorer-card-grid--two">
-            {copy.continuingCare.items.map((item) => <CareCard item={item} labels={copy.labels} key={item.id} />)}
+        <ChapterAccordion id="continuing-care" section={copy.continuingCare} isOpen={openChapterIds.has('continuing-care')} onToggle={() => toggleChapter('continuing-care')}>
+          <div className="explorer-package-grid explorer-package-grid--four explorer-aux-grid explorer-aux-grid--care">
+            {copy.continuingCare.items.map((item) => <ScopeCard item={item} labels={copy.labels} key={item.id} />)}
           </div>
           <p className="explorer-chapter-caution"><Icon name="info" size={18} />{copy.continuingCare.globalExclusion}</p>
-        </section>
+        </ChapterAccordion>
 
-        <section className="explorer-chapter" aria-labelledby="operations-title">
-          <ChapterHeading {...copy.operations} id="operations-title" />
-          <div className="operations-progression">
-            {copy.operations.items.map((item, index) => <OperationsCard item={item} labels={copy.labels} index={index} key={item.id} />)}
+        <ChapterAccordion id="commerce-operations" section={copy.operations} isOpen={openChapterIds.has('commerce-operations')} onToggle={() => toggleChapter('commerce-operations')}>
+          <div className="explorer-package-grid explorer-package-grid--four explorer-aux-grid explorer-aux-grid--operations">
+            {copy.operations.items.map((item, index) => <ScopeCard item={item} labels={copy.labels} variant="operations" index={index} key={item.id} />)}
           </div>
-        </section>
+        </ChapterAccordion>
 
-        <section className="explorer-chapter" aria-labelledby="specialist-title">
-          <ChapterHeading {...copy.specialistModules} id="specialist-title" />
-          <div className="explorer-card-grid explorer-card-grid--modules">
-            {copy.specialistModules.items.map((item) => <ModuleCard item={item} labels={copy.labels} key={item.id} />)}
+        <ChapterAccordion id="specialist-modules" section={copy.specialistModules} isOpen={openChapterIds.has('specialist-modules')} onToggle={() => toggleChapter('specialist-modules')}>
+          <div className="explorer-package-grid explorer-aux-grid explorer-aux-grid--modules">
+            {copy.specialistModules.items.map((item) => <ScopeCard item={item} labels={copy.labels} variant="module" key={item.id} />)}
           </div>
-        </section>
+        </ChapterAccordion>
 
-        <section className="explorer-chapter explorer-chapter--planned" aria-labelledby="not-packaged-title">
-          <ChapterHeading {...copy.notPackaged} id="not-packaged-title" />
-          <ScopeList items={copy.notPackaged.items} icon="close" />
-        </section>
+        <ChapterAccordion id="not-packaged" section={copy.notPackaged} isOpen={openChapterIds.has('not-packaged')} onToggle={() => toggleChapter('not-packaged')}>
+          <div className="explorer-planned-list"><ScopeList items={copy.notPackaged.items} icon="close" /></div>
+        </ChapterAccordion>
 
-        <section className="explorer-chapter explorer-journey" aria-labelledby="journey-title">
-          <ChapterHeading {...copy.journey} id="journey-title" />
-          <ol>
+        <ChapterAccordion id="customer-journey" section={copy.journey} isOpen={openChapterIds.has('customer-journey')} onToggle={() => toggleChapter('customer-journey')}>
+          <ol className="explorer-journey-list">
             {copy.journey.steps.map((step, index) => (
               <li key={step}>
                 <span className="mono">{String(index + 1).padStart(2, '0')}</span>
@@ -358,7 +374,7 @@ export function Packages() {
               </li>
             ))}
           </ol>
-        </section>
+        </ChapterAccordion>
       </div>
     </section>
   )
