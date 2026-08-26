@@ -3,6 +3,7 @@
 export const projects = [
   {
     id: 'lam',
+    canvasColor: '#eceae2',
     number: '01 / 03',
     name: 'LAM',
     category: 'FASHION / E-COMMERCE',
@@ -20,6 +21,7 @@ export const projects = [
   },
   {
     id: 'glow-by-hk',
+    canvasColor: '#d9c2b8',
     number: '02 / 03',
     name: 'GLOWbyHK',
     category: 'BEAUTY / E-COMMERCE',
@@ -37,6 +39,7 @@ export const projects = [
   },
   {
     id: 'claro',
+    canvasColor: '#3f1c30',
     number: '03 / 03',
     name: 'CLARO',
     category: 'FASHION / E-COMMERCE',
