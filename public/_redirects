@@ -1,4 +1,3 @@
 # Add a verified www-to-apex or apex-to-www redirect only after the final domain is approved.
-/assets/*  /404.html  404
 /privacy  /index.html  200
 /terms    /index.html  200
