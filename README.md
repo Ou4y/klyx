@@ -28,7 +28,7 @@ npm run preview
 - Output directory: `dist`
 - Required environment variable: `VITE_SITE_URL=https://your-verified-domain`
 
-The build creates a real `404.html` and generates `robots.txt` and `sitemap.xml` from `VITE_SITE_URL`. If the variable is missing, the build deliberately blocks indexing and uses localhost metadata so a preview cannot accidentally publish an invented canonical domain.
+The build creates a top-level `dist/404.html`, which makes Cloudflare Pages return its custom 404 response for an unknown path rather than applying its default SPA fallback. Keep the explicit `/privacy` and `/terms` rewrites in `public/_redirects`, but do not add a catch-all `200` rewrite or a `404` redirect rule. The build also generates `robots.txt` and `sitemap.xml` from `VITE_SITE_URL`. If the variable is missing, the build deliberately blocks indexing and uses localhost metadata so a preview cannot accidentally publish an invented canonical domain.
 
 Before a public deployment, verify the final domain and add one approved canonical host redirect to `public/_redirects` (for example, www to apex or apex to www). Do not add both directions.
 
