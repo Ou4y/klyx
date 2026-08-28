@@ -1,4 +1,4 @@
-import { copyFile, writeFile } from 'node:fs/promises'
+import { copyFile, readFile, writeFile } from 'node:fs/promises'
 import { resolve } from 'node:path'
 
 const outputDirectory = resolve('dist')
@@ -7,6 +7,14 @@ const siteUrl = configuredUrl || 'http://localhost'
 const isPublic = Boolean(configuredUrl)
 
 await copyFile(resolve(outputDirectory, 'index.html'), resolve(outputDirectory, '404.html'))
+
+if (configuredUrl) {
+  const indexPath = resolve(outputDirectory, 'index.html')
+  const indexHtml = await readFile(indexPath, 'utf8')
+  const canonicalTags = `    <link rel="canonical" href="${siteUrl}/" />\n    <meta property="og:url" content="${siteUrl}/" />\n`
+
+  await writeFile(indexPath, indexHtml.replace('</head>', `${canonicalTags}  </head>`))
+}
 
 const robots = isPublic
   ? `User-agent: *\nAllow: /\n\nSitemap: ${siteUrl}/sitemap.xml\n`
