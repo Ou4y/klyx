@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useState } from 'react'
+import { browserNow, cancelFrame, requestFrame } from '../utils/browser'
 
 function normalizePathname(pathname) {
   return pathname.replace(/\/+$/, '') || '/'
@@ -70,7 +71,7 @@ export function useActiveSection(sectionIds, { offsetRef } = {}) {
         && hashBounds.top > offset
         && hashBounds.top <= offset + scrollMargin + 2
         && hashBounds.bottom > offset
-      const activeId = (hashSection && window.performance.now() < hashSyncUntil) || hashIsAnchorAligned
+      const activeId = (hashSection && browserNow() < hashSyncUntil) || hashIsAnchorAligned
         ? hashSectionId
         : findSectionAtOffset(sections, offset)
       setActiveSectionId((current) => current === activeId ? current : activeId)
@@ -79,7 +80,7 @@ export function useActiveSection(sectionIds, { offsetRef } = {}) {
     const updateFromHash = () => {
       const hashSectionId = findOwningSection(window.location.hash, idSet)
       if (hashSectionId) {
-        hashSyncUntil = window.performance.now() + 1200
+        hashSyncUntil = browserNow() + 1200
         setActiveSectionId((current) => current === hashSectionId ? current : hashSectionId)
         return
       }
@@ -91,38 +92,44 @@ export function useActiveSection(sectionIds, { offsetRef } = {}) {
     const createObserver = () => {
       observer?.disconnect()
 
-      if (!('IntersectionObserver' in window)) {
+      if (typeof window.IntersectionObserver !== 'function') {
         updateFromHash()
         return
       }
 
       const offset = readOffset()
       const bottomInset = Math.max(window.innerHeight - offset - 2, 0)
-      observer = new IntersectionObserver(updateFromViewport, {
-        rootMargin: `-${offset}px 0px -${bottomInset}px 0px`,
-        threshold: 0,
-      })
+      try {
+        observer = new window.IntersectionObserver(updateFromViewport, {
+          rootMargin: `-${offset}px 0px -${bottomInset}px 0px`,
+          threshold: 0,
+        })
+      } catch {
+        observer = undefined
+        updateFromHash()
+        return
+      }
       sections.forEach((section) => observer.observe(section))
     }
 
     const handleResize = () => {
-      window.cancelAnimationFrame(resizeFrame)
-      resizeFrame = window.requestAnimationFrame(() => {
+      cancelFrame(resizeFrame)
+      resizeFrame = requestFrame(() => {
         createObserver()
         updateFromViewport()
       })
     }
 
     createObserver()
-    initialFrame = window.requestAnimationFrame(updateFromHash)
+    initialFrame = requestFrame(updateFromHash)
     window.addEventListener('hashchange', updateFromHash)
     window.addEventListener('popstate', updateFromHash)
     window.addEventListener('resize', handleResize)
 
     return () => {
       observer?.disconnect()
-      window.cancelAnimationFrame(resizeFrame)
-      window.cancelAnimationFrame(initialFrame)
+      cancelFrame(resizeFrame)
+      cancelFrame(initialFrame)
       window.removeEventListener('hashchange', updateFromHash)
       window.removeEventListener('popstate', updateFromHash)
       window.removeEventListener('resize', handleResize)

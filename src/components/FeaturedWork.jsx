@@ -2,6 +2,7 @@ import { useLayoutEffect, useRef, useState } from 'react'
 import { siteContent } from '../data/siteContent'
 import { projects } from '../data/projects'
 import { useLocale } from '../i18n/locale-context'
+import { cancelFrame, getMediaQuery, requestFrame, subscribeToMediaQuery } from '../utils/browser'
 import { Icon } from './Icon'
 
 const desktopRowSize = 3
@@ -213,7 +214,7 @@ function measureConnectorGeometry(map) {
       })
     }
 
-    const lastProject = row.projects.at(-1)
+    const lastProject = row.projects[row.projects.length - 1]
     const trailingEdge = rtl ? lastProject.left : lastProject.right
     const exitY = lastProject.top + (lastProject.height * 0.5)
 
@@ -243,7 +244,7 @@ function useWorkConnectorGeometry(mapRef, language, projectCount) {
       return undefined
     }
 
-    const desktopMedia = window.matchMedia(desktopConnectorQuery)
+    const desktopMedia = getMediaQuery(desktopConnectorQuery)
     let active = true
     let frameId = 0
 
@@ -263,27 +264,42 @@ function useWorkConnectorGeometry(mapRef, language, projectCount) {
         return
       }
 
-      commitGeometry(desktopMedia.matches ? measureConnectorGeometry(map) : null)
+      const desktop = desktopMedia ? desktopMedia.matches : window.innerWidth >= 821
+
+      try {
+        commitGeometry(desktop ? measureConnectorGeometry(map) : null)
+      } catch (error) {
+        console.warn('Work connector enhancement was disabled.', error)
+        commitGeometry(null)
+      }
     }
 
     const scheduleMeasure = () => {
-      window.cancelAnimationFrame(frameId)
-      frameId = window.requestAnimationFrame(measure)
+      cancelFrame(frameId)
+      frameId = requestFrame(measure)
     }
 
     const observedElements = [
       map,
       ...map.querySelectorAll('.work-map__row, .work-map__logo-window, .work-map__rail'),
     ]
-    const resizeObserver = typeof ResizeObserver === 'function' ? new ResizeObserver(scheduleMeasure) : null
+    let resizeObserver = null
+    if (typeof window.ResizeObserver === 'function') {
+      try {
+        resizeObserver = new window.ResizeObserver(scheduleMeasure)
+      } catch {
+        resizeObserver = null
+      }
+    }
     const images = Array.from(map.querySelectorAll('.work-map__logo'))
+    const unsubscribeDesktopMedia = subscribeToMediaQuery(desktopMedia, scheduleMeasure)
+    const fontSet = document.fonts
 
     observedElements.forEach((element) => resizeObserver?.observe(element))
     images.forEach((image) => image.addEventListener('load', scheduleMeasure))
-    desktopMedia.addEventListener('change', scheduleMeasure)
     window.addEventListener('resize', scheduleMeasure, { passive: true })
-    document.fonts?.addEventListener?.('loadingdone', scheduleMeasure)
-    document.fonts?.ready.then(() => {
+    fontSet?.addEventListener?.('loadingdone', scheduleMeasure)
+    if (fontSet?.ready && typeof fontSet.ready.then === 'function') fontSet.ready.then(() => {
       if (active) {
         scheduleMeasure()
       }
@@ -293,12 +309,12 @@ function useWorkConnectorGeometry(mapRef, language, projectCount) {
 
     return () => {
       active = false
-      window.cancelAnimationFrame(frameId)
+      cancelFrame(frameId)
       resizeObserver?.disconnect()
       images.forEach((image) => image.removeEventListener('load', scheduleMeasure))
-      desktopMedia.removeEventListener('change', scheduleMeasure)
+      unsubscribeDesktopMedia()
       window.removeEventListener('resize', scheduleMeasure)
-      document.fonts?.removeEventListener?.('loadingdone', scheduleMeasure)
+      fontSet?.removeEventListener?.('loadingdone', scheduleMeasure)
     }
   }, [language, mapRef, projectCount])
 

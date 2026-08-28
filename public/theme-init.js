@@ -1,8 +1,8 @@
-(() => {
+;(function () {
   try {
-    const savedTheme = localStorage.getItem('klyx-theme')
+    var savedTheme = window.localStorage.getItem('klyx-theme')
     document.documentElement.dataset.theme = savedTheme === 'light' ? 'light' : 'dark'
-  } catch {
+  } catch (_) {
     document.documentElement.dataset.theme = 'dark'
   }
 })()

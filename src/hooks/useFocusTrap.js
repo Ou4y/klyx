@@ -1,4 +1,5 @@
 import { useEffect } from 'react'
+import { cancelFrame, focusWithoutScroll, requestFrame } from '../utils/browser'
 
 const focusableSelector = [
   'a[href]',
@@ -19,7 +20,7 @@ export function useFocusTrap({ active, containerRef, onClose, returnFocusRef }) 
     document.body.style.overflow = 'hidden'
 
     const focusable = () => [...(container?.querySelectorAll(focusableSelector) || [])]
-    requestAnimationFrame(() => focusable()[0]?.focus())
+    const focusFrame = requestFrame(() => focusWithoutScroll(focusable()[0]))
 
     const handleKeyDown = (event) => {
       if (event.key === 'Escape') {
@@ -32,7 +33,7 @@ export function useFocusTrap({ active, containerRef, onClose, returnFocusRef }) 
       const elements = focusable()
       if (!elements.length) return
       const first = elements[0]
-      const last = elements.at(-1)
+      const last = elements[elements.length - 1]
 
       if (event.shiftKey && document.activeElement === first) {
         event.preventDefault()
@@ -46,9 +47,10 @@ export function useFocusTrap({ active, containerRef, onClose, returnFocusRef }) 
     document.addEventListener('keydown', handleKeyDown)
 
     return () => {
+      cancelFrame(focusFrame)
       document.removeEventListener('keydown', handleKeyDown)
       document.body.style.overflow = previousOverflow
-      returnFocusElement?.focus()
+      focusWithoutScroll(returnFocusElement)
     }
   }, [active, containerRef, onClose, returnFocusRef])
 }

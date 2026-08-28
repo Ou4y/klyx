@@ -12,7 +12,8 @@ export function LocaleProvider({ children }) {
     const isArabic = language === 'ar'
     document.documentElement.lang = language
     document.documentElement.dir = isArabic ? 'rtl' : 'ltr'
-    document.querySelector('.skip-link')?.replaceChildren(isArabic ? 'انتقل إلى المحتوى الرئيسي' : 'Skip to main content')
+    const skipLink = document.querySelector('.skip-link')
+    if (skipLink) skipLink.textContent = isArabic ? 'انتقل إلى المحتوى الرئيسي' : 'Skip to main content'
 
     try {
       window.localStorage.setItem('klyx-language', language)

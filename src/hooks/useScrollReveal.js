@@ -1,4 +1,5 @@
 import { useEffect } from 'react'
+import { mediaQueryMatches } from '../utils/browser'
 
 const revealSelector = [
   '.section-heading',
@@ -18,23 +19,29 @@ const revealSelector = [
 
 export function useScrollReveal() {
   useEffect(() => {
-    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
-    if (reducedMotion || !('IntersectionObserver' in window)) return undefined
+    const reducedMotion = mediaQueryMatches('(prefers-reduced-motion: reduce)', true)
+    if (reducedMotion || typeof window.IntersectionObserver !== 'function') return undefined
 
     const elements = [...document.querySelectorAll(revealSelector)]
+    let observer
+
+    try {
+      observer = new window.IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return
+          entry.target.classList.add('is-revealed')
+          observer.unobserve(entry.target)
+        })
+      }, { rootMargin: '0px 0px -8% 0px', threshold: 0.08 })
+    } catch {
+      return undefined
+    }
+
     document.documentElement.classList.add('reveal-ready')
     elements.forEach((element, index) => {
       element.classList.add('reveal-item')
       element.style.setProperty('--reveal-delay', `${Math.min(index % 4, 3) * 55}ms`)
     })
-
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (!entry.isIntersecting) return
-        entry.target.classList.add('is-revealed')
-        observer.unobserve(entry.target)
-      })
-    }, { rootMargin: '0px 0px -8% 0px', threshold: 0.08 })
 
     elements.forEach((element) => observer.observe(element))
 

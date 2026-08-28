@@ -2,6 +2,12 @@ import { useCallback, useEffect, useRef, useState } from 'react'
 import { siteConfig } from '../config/site'
 import { serviceExplorerContent } from '../data/serviceExplorer'
 import { useLocale } from '../i18n/locale-context'
+import {
+  focusWithoutScroll,
+  mediaQueryMatches,
+  requestFrame,
+  scrollElementIntoView,
+} from '../utils/browser'
 import { Icon } from './Icon'
 
 const shortcutLabels = {
@@ -201,11 +207,14 @@ export function Packages() {
       window.history.replaceState(null, '', `${window.location.pathname}${window.location.search}#${serviceId}`)
     }
 
-    window.requestAnimationFrame(() => {
+    requestFrame(() => {
       const button = serviceButtonRefs.current.get(serviceId)
-      const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
-      button?.closest('.service-explorer-item')?.scrollIntoView({ behavior: reducedMotion ? 'auto' : 'smooth', block: 'start' })
-      if (focus) button?.focus({ preventScroll: true })
+      const reducedMotion = mediaQueryMatches('(prefers-reduced-motion: reduce)', true)
+      scrollElementIntoView(button?.closest('.service-explorer-item'), {
+        behavior: reducedMotion ? 'auto' : 'smooth',
+        block: 'start',
+      })
+      if (focus) focusWithoutScroll(button)
     })
   }, [])
 

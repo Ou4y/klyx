@@ -6,6 +6,7 @@ import { Header } from '../components/Header'
 import { Hero } from '../components/Hero'
 import { Packages } from '../components/Packages'
 import { Partnership } from '../components/Partnership'
+import { ReliabilityBoundary } from '../components/ReliabilityBoundary'
 import { Services } from '../components/Services'
 import { StructuredData } from '../components/StructuredData'
 import { WhatsAppAction } from '../components/WhatsAppAction'
@@ -26,9 +27,13 @@ export function HomePage() {
       <main id="main-content">
         <Hero />
         <Services />
-        <FeaturedWork />
+        <ReliabilityBoundary fallback={null}>
+          <FeaturedWork />
+        </ReliabilityBoundary>
         <Packages />
-        <Partnership />
+        <ReliabilityBoundary fallback={null}>
+          <Partnership />
+        </ReliabilityBoundary>
         <Faq />
         <Contact />
       </main>

@@ -1,4 +1,11 @@
 import { useEffect } from 'react'
+import {
+  cancelFrame,
+  getMediaQuery,
+  mediaQueryMatches,
+  requestFrame,
+  subscribeToMediaQuery,
+} from '../utils/browser'
 
 const clamp = (value, minimum, maximum) => Math.min(Math.max(value, minimum), maximum)
 
@@ -9,20 +16,20 @@ export function useProcessProgress({ containerRef, progressRef }) {
     if (!container || !progressPath) return undefined
 
     const steps = [...container.querySelectorAll('.process-step')]
-    const motionPreference = window.matchMedia('(prefers-reduced-motion: reduce)')
+    const motionPreference = getMediaQuery('(prefers-reduced-motion: reduce)')
     let frame = 0
 
     const render = () => {
       frame = 0
 
-      if (motionPreference.matches) {
+      if (!motionPreference || motionPreference.matches) {
         progressPath.style.strokeDashoffset = '0'
         steps.forEach((step) => step.classList.add('is-reached'))
         return
       }
 
       const bounds = container.getBoundingClientRect()
-      const desktop = window.matchMedia('(min-width: 721px)').matches
+      const desktop = mediaQueryMatches('(min-width: 721px)', window.innerWidth >= 721)
       let progress
 
       if (desktop) {
@@ -49,19 +56,19 @@ export function useProcessProgress({ containerRef, progressRef }) {
     }
 
     const requestRender = () => {
-      if (!frame) frame = window.requestAnimationFrame(render)
+      if (!frame) frame = requestFrame(render)
     }
 
     render()
     window.addEventListener('scroll', requestRender, { passive: true })
     window.addEventListener('resize', requestRender)
-    motionPreference.addEventListener('change', render)
+    const unsubscribeMotionPreference = subscribeToMediaQuery(motionPreference, render)
 
     return () => {
-      if (frame) window.cancelAnimationFrame(frame)
+      cancelFrame(frame)
       window.removeEventListener('scroll', requestRender)
       window.removeEventListener('resize', requestRender)
-      motionPreference.removeEventListener('change', render)
+      unsubscribeMotionPreference()
       progressPath.style.removeProperty('stroke-dashoffset')
       steps.forEach((step) => step.classList.remove('is-reached'))
     }
