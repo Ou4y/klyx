@@ -1,8 +1,23 @@
 ;(function () {
+  var root = document.documentElement
+
+  root.classList.add('js')
+
+  var recoveryTimer = window.setTimeout(function () {
+    root.classList.add('app-load-failed')
+  }, 10000)
+
+  window.__KLYX_MARK_APP_READY__ = function () {
+    window.clearTimeout(recoveryTimer)
+    root.classList.remove('app-load-failed')
+    root.classList.add('app-ready')
+    delete window.__KLYX_MARK_APP_READY__
+  }
+
   try {
     var savedTheme = window.localStorage.getItem('klyx-theme')
-    document.documentElement.dataset.theme = savedTheme === 'light' ? 'light' : 'dark'
+    root.dataset.theme = savedTheme === 'light' ? 'light' : 'dark'
   } catch (_) {
-    document.documentElement.dataset.theme = 'dark'
+    root.dataset.theme = 'dark'
   }
 })()

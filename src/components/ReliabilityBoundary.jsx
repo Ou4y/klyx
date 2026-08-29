@@ -22,6 +22,10 @@ export function AppFallback() {
 export class ReliabilityBoundary extends Component {
   state = { failed: false }
 
+  componentDidMount() {
+    window.__KLYX_MARK_APP_READY__?.()
+  }
+
   static getDerivedStateFromError() {
     return { failed: true }
   }
