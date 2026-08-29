@@ -41,6 +41,8 @@ export function StructuredData() {
     })),
   }
 
+  if (document.head.querySelector('script[data-klyx-structured-data]')) return null
+
   return (
     <>
       <script type="application/ld+json">{JSON.stringify(organization)}</script>

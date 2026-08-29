@@ -3,7 +3,7 @@ export const legalNotices = {
     eyebrow: 'Legal / Privacy',
     title: 'Privacy Policy',
     description: 'How the KLYX website handles personal and technical information.',
-    updated: '15 August 2026',
+    updated: '29 August 2026',
     summary:
       'This notice explains the limited information connected with the KLYX website and what may happen when you choose to contact KLYX through an external channel.',
     status:
@@ -20,9 +20,10 @@ export const legalNotices = {
       {
         id: 'information',
         title: '2. Information connected with the website',
-        intro: 'The current website does not include a contact form, user account, advertising pixel, or analytics tool. Information may still arise in these limited ways:',
+        intro: 'The current website does not include a contact form, user account, or advertising pixel. It uses Cloudflare Web Analytics for aggregate page and performance measurement. Information may arise in these limited ways:',
         list: [
           'Contact information you choose to send through WhatsApp, a telephone call, email, Instagram, or TikTok, such as your name, telephone number, handle, message, attachments, and business details.',
+          'Cloudflare states that its Web Analytics beacon measures performance without tracking individual visitors across customer sites or collecting or using their personal data. The service still communicates with Cloudflare infrastructure to deliver the beacon and aggregate measurements.',
           'Technical request data that a hosting, security, or network provider may process, such as an IP address, browser or device type, requested page, timestamps, and security events.',
           'Your light-or-dark theme and English-or-Arabic language choices, stored only in your browser using local storage. The website does not send these preferences to KLYX.',
         ],
@@ -89,6 +90,10 @@ export const legalNotices = {
       {
         label: 'Egypt State Information Service — Personal Data Protection Law No. 151 of 2020',
         url: 'https://sis.gov.eg/en/media-center/news/sisi-endorses-law-on-personal-data-protection/',
+      },
+      {
+        label: 'Cloudflare — Web Analytics data origin and collection',
+        url: 'https://developers.cloudflare.com/web-analytics/data-metrics/data-origin-and-collection/',
       },
     ],
   },

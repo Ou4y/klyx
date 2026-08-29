@@ -4,7 +4,7 @@ import { Icon } from '../components/Icon'
 import { WhatsAppAction } from '../components/WhatsAppAction'
 import { legalNotices } from '../data/legal'
 import { legalNoticesAr } from '../data/legalAr'
-import { siteContent } from '../data/siteContent'
+import { routeContent } from '../data/routeContent'
 import { useLocale } from '../i18n/locale-context'
 import { useRouteMeta } from '../hooks/useRouteMeta'
 import { useScrollReveal } from '../hooks/useScrollReveal'
@@ -12,7 +12,7 @@ import { useScrollReveal } from '../hooks/useScrollReveal'
 export function LegalPage({ type }) {
   const { language } = useLocale()
   const content = (language === 'ar' ? legalNoticesAr : legalNotices)[type]
-  const ui = siteContent[language].legalUi
+  const ui = routeContent[language].legalUi
   useRouteMeta({
     title: `${content.title} — KLYX`,
     description: content.description,

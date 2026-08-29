@@ -3,13 +3,13 @@ import { Header } from '../components/Header'
 import { WhatsAppAction } from '../components/WhatsAppAction'
 import { useRouteMeta } from '../hooks/useRouteMeta'
 import { Icon } from '../components/Icon'
-import { siteContent } from '../data/siteContent'
+import { routeContent } from '../data/routeContent'
 import { useLocale } from '../i18n/locale-context'
 import { siteMeta } from '../config/site'
 
 export function NotFoundPage() {
   const { language } = useLocale()
-  const copy = siteContent[language].notFound
+  const copy = routeContent[language].notFound
   useRouteMeta({
     title: `${language === 'ar' ? 'الصفحة غير موجودة' : 'Page not found'} — KLYX`,
     description: siteMeta.descriptions[language],

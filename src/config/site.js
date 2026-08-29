@@ -1,3 +1,5 @@
+import { siteMetadata } from './siteMetadata'
+
 export const siteConfig = {
   whatsappNumber: '201283310083',
   whatsappUrl: 'https://wa.me/201283310083',
@@ -8,16 +10,6 @@ export const siteConfig = {
 }
 
 export const siteMeta = {
-  name: 'KLYX',
+  ...siteMetadata,
   siteUrl: import.meta.env.VITE_SITE_URL?.replace(/\/$/, '') || '',
-  locale: 'en_EG',
-  language: 'en',
-  titles: {
-    en: 'KLYX — Websites, commerce, and internal tools for growing businesses',
-    ar: 'KLYX — مواقع ومتاجر وأنظمة داخلية للأعمال',
-  },
-  descriptions: {
-    en: 'KLYX builds commerce stores, landing pages, portfolio websites, corporate websites, and internal tools for growing businesses.',
-    ar: 'تطوّر KLYX المتاجر الإلكترونية وصفحات الهبوط والمواقع التعريفية ومواقع الشركات والأنظمة الداخلية للأعمال.',
-  },
 }

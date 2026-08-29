@@ -7,6 +7,6 @@ export default defineConfig({
     target: ['es2017', 'safari12'],
     cssTarget: 'safari12',
     cssCodeSplit: true,
-    sourcemap: true,
+    sourcemap: false,
   },
 })
