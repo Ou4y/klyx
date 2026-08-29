@@ -6,8 +6,8 @@ export const projects = [
     canvasColor: '#eceae2',
     number: '01 / 03',
     name: 'LAM',
-    category: 'FASHION / E-COMMERCE',
-    contribution: 'Online store',
+    category: { en: 'FASHION / E-COMMERCE', ar: 'أزياء / تجارة إلكترونية' },
+    contribution: { en: 'Online store', ar: 'متجر إلكتروني' },
     image: {
       src: '/projects/lam-logo-1600.png',
       srcSet: '/projects/lam-logo-800.png 800w, /projects/lam-logo-1600.png 1600w',
@@ -24,8 +24,8 @@ export const projects = [
     canvasColor: '#d9c2b8',
     number: '02 / 03',
     name: 'GLOWbyHK',
-    category: 'BEAUTY / E-COMMERCE',
-    contribution: 'Digital storefront',
+    category: { en: 'BEAUTY / E-COMMERCE', ar: 'جمال / تجارة إلكترونية' },
+    contribution: { en: 'Digital storefront', ar: 'واجهة بيع رقمية' },
     comingSoon: true,
     image: {
       src: '/projects/glow-by-hk-logo-1600.png',
@@ -42,8 +42,8 @@ export const projects = [
     canvasColor: '#3f1c30',
     number: '03 / 03',
     name: 'CLARO',
-    category: 'FASHION / E-COMMERCE',
-    contribution: 'Online store',
+    category: { en: 'FASHION / E-COMMERCE', ar: 'أزياء / تجارة إلكترونية' },
+    contribution: { en: 'Online store', ar: 'متجر إلكتروني' },
     image: {
       src: '/projects/claro-logo-1600.png',
       srcSet: '/projects/claro-logo-800.png 800w, /projects/claro-logo-1600.png 1600w',

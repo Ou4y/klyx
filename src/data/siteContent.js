@@ -41,8 +41,8 @@ export const siteContent = {
       { number: '05', title: 'Internal Tools', summary: 'Simple custom systems that make recurring team work easier to manage.', items: ['Workflow and role discovery', 'Dashboards, processes, and reporting', 'Scoped integrations, testing, and handover'], icon: 'tools', vectorLabel: 'Internal workflow system illustration' },
     ],
     work: {
-      eyebrow: 'Selected work / Digital commerce', title: 'Distinct brands. Clear digital experiences.',
-      intro: 'A selected group of fashion and beauty storefronts, each shaped around its own identity.',
+      eyebrow: 'Selected work / Digital solutions', title: 'Different needs. Clear digital outcomes.',
+      intro: 'A selection of digital work shaped around each project’s goals, identity, and practical requirements.',
       proof: 'PROOF / PENDING OWNER REVIEW', library: 'PROJECT LIBRARY / 03', pendingTitle: 'Approved project profiles are being prepared.',
       pendingText: 'Client names, screenshots, contributions, and links will appear only after the owner verifies each record. No placeholder clients or unverified results are published.',
       instagram: 'Instagram', visit: 'Visit online presence', visitShort: 'Visit', comingSoon: 'Coming soon',
@@ -135,8 +135,8 @@ export const siteContent = {
       { number: '05', title: 'الأنظمة الداخلية', summary: 'أنظمة مخصصة وبسيطة تسهّل إدارة العمل المتكرر داخل الفريق.', items: ['اكتشاف مسارات العمل والأدوار', 'لوحات وعمليات وتقارير', 'تكاملات محددة واختبار وتسليم'], icon: 'tools', vectorLabel: 'رسم توضيحي لنظام سير عمل داخلي' },
     ],
     work: {
-      eyebrow: 'أعمال مختارة / تجارة رقمية', title: 'علامات مميزة. تجارب رقمية واضحة.',
-      intro: 'مجموعة مختارة من متاجر الأزياء والجمال، صُمم كل منها بما يناسب هويته الخاصة.',
+      eyebrow: 'أعمال مختارة / حلول رقمية', title: 'احتياجات مختلفة. نتائج رقمية واضحة.',
+      intro: 'مجموعة مختارة من الأعمال الرقمية، صُمم كل مشروع منها حول أهدافه وهويته ومتطلباته العملية.',
       proof: 'الدليل / بانتظار مراجعة المالك', library: 'مكتبة المشروعات / 03', pendingTitle: 'يجري إعداد ملفات المشروعات المعتمدة.',
       pendingText: 'لن تظهر أسماء العملاء أو لقطات الشاشة أو المساهمات أو الروابط إلا بعد تحقق المالك من كل سجل. لا ننشر عملاء افتراضيين أو نتائج غير موثقة.',
       instagram: 'إنستغرام', visit: 'زيارة الموقع', visitShort: 'زيارة', comingSoon: 'قريباً',
