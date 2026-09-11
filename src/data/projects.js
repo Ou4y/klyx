@@ -35,7 +35,7 @@ export const projects = [
       alt: 'Glow by HK logo',
     },
     instagramUrl: '',
-    websiteUrl: '',
+    websiteUrl: 'https://glowbyhk.com',
   },
   {
     id: 'claro',
